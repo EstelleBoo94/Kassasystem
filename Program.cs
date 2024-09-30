@@ -4,6 +4,22 @@
     {
         static void Main(string[] args)
         {
+
+            List<Product> productList = new List<Product>
+            {
+                new Product(001, "äpple", 34.95f, true),
+                new Product(002, "banan", 28.95f, true),
+                new Product(003, "mjölk 1l", 13.50f, false),
+                new Product(004, "snabbkaffe", 78.95f, false),
+                new Product(005, "nötfärs 1kg", 120.00f, false),
+                new Product(006, "varmkorv", 37.95f, false),
+                new Product(007, "bröd", 29.95f, false),
+                new Product(008, "korvbröd", 20.95f, false),
+                new Product(009, "kakor", 21.95f, false),
+                new Product(010, "läsk", 15.95f, false),
+
+            };
+
             //Menyval Ny kund, Admin, Avsluta
             bool exit = false;
 

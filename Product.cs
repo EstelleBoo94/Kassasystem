@@ -10,10 +10,10 @@ namespace Kassasystem
     {
         int _productId;
         string _productName;
-        int _price;
+        float _price;
         bool _soldByKilo;
 
-        public Product(int productId, string productName, int price, bool soldByKilo)
+        public Product(int productId, string productName, float price, bool soldByKilo)
         {
             _productId = productId;
             _productName = productName;
