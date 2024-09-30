@@ -13,6 +13,7 @@ namespace Kassasystem
         float _price;
         bool _soldByKilo;
 
+
         public Product(int productId, string productName, float price, bool soldByKilo)
         {
             _productId = productId;
@@ -20,5 +21,10 @@ namespace Kassasystem
             _price = price;
             _soldByKilo = soldByKilo;
         }
+
+        public int ProductId { get { return _productId; } }
+        public string ProductName { get { return _productName; } }
+        public float Price { get { return _price; } }
+        public bool SoldByKilo { get { return _soldByKilo; } }
     }
 }
