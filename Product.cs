@@ -6,25 +6,31 @@ using System.Threading.Tasks;
 
 namespace Kassasystem
 {
-    internal class Product
+    public enum SellingType
+    {
+        ByItem,
+        ByKilo
+    }
+
+    public class Product
     {
         int _productId;
         string _productName;
         float _price;
-        bool _soldByKilo;
+        SellingType _sellingType;
 
 
-        public Product(int productId, string productName, float price, bool soldByKilo)
+        public Product(int productId, string productName, float price, SellingType sellingType)
         {
             _productId = productId;
             _productName = productName;
             _price = price;
-            _soldByKilo = soldByKilo;
+            _sellingType = sellingType;
         }
 
         public int ProductId { get { return _productId; } }
         public string ProductName { get { return _productName; } }
         public float Price { get { return _price; } }
-        public bool SoldByKilo { get { return _soldByKilo; } }
+        public SellingType SellingType { get { return _sellingType; } }
     }
 }
