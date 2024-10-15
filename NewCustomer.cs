@@ -27,6 +27,8 @@ namespace Kassasystem
 
             };
 
+            Console.Clear();
+
             Console.WriteLine("Ange säljarnummer (tex 123):");
             int sellerID = int.Parse(Console.ReadLine());
 
