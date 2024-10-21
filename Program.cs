@@ -10,51 +10,6 @@
             startMenu.ShowMenu();
 
             //Menyval Ny kund, Admin, Avsluta
-            //bool exit = false;
-
-            //while (!exit)
-            //{
-            //    Console.WriteLine("Skriv siffra för menyval:");
-            //    Console.WriteLine("1. Ny kund");
-            //    Console.WriteLine("2. Admin");
-            //    Console.WriteLine("3. Avsluta");
-
-            //    string input = Console.ReadLine();
-            //    int option;
-
-            //    Console.Clear();
-
-            //    if (int.TryParse(input, out option))
-            //    {
-            //        switch (option)
-            //        {
-            //            case 1:
-            //                NewCustomer customer = new NewCustomer();
-            //                customer.StartPurchase();
-            //                break;
-
-            //            case 2:
-            //                Console.WriteLine("Admin val");
-            //                break;
-
-            //            case 3:
-            //                Console.WriteLine("Kassan stängs, tryck valfri tangent...");
-            //                Console.ReadKey();
-            //                exit = true;
-            //                break;
-
-            //            default:
-            //                Console.WriteLine("Ogiltigt val.");
-            //                break;
-            //        }
-            //    }
-            //    else
-            //    {
-            //        Console.WriteLine("Ogiltigt val.");
-            //    }
-            //}
-
-
 
             //Ny kund
             //Få/söka en lista på produkter och artikelnummer

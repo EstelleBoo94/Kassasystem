@@ -8,6 +8,8 @@ namespace Kassasystem
 {
     public class Receipt
     {
+        public string SellerId { get; set; }
+
         private List<Product> receiptList = new List<Product>();
 
         public void AddToReceipt(Product product)
@@ -15,24 +17,31 @@ namespace Kassasystem
             receiptList.Add(product);
         }
 
-        public string GetReceiptList(Product productItem, float amountItem)
+        public void GetReceiptList()
         {
-            float amount;
-            string getreceiptList = "KVITTO\n";
+            Console.WriteLine($"\n**KVITTO**\nSäljare: {SellerId}\n");
+
             foreach (Product product in receiptList)
             {
-                amount = product.Price * amountItem;
-                if (product.SellingType == SellingType.ByKilo)
+                if (product.SellType == SellingType.ByKilo)
                 {
-                    getreceiptList += $"{product.ProductName} {amountItem}kg {amount}kr\n";
+                    Console.WriteLine($"{product.ProductName} {product.Amount} kg {product.Price * product.Amount} kr");
                 }
-                else if (product.SellingType == SellingType.ByItem)
+                else if (product.SellType == SellingType.ByItem)
                 {
-                    getreceiptList += $"{product.ProductName} {amountItem}st {amount}kr\n";
+                    Console.WriteLine($"{product.ProductName} {product.Amount} st {product.Price * product.Amount} kr");
                 }
-
+                
             }
-            return getreceiptList;
+
+            float total = 0;
+            foreach (Product product in receiptList)
+            {
+                total += (product.Price * product.Amount);
+            }
+            Console.WriteLine($"TOTAL {total}");
+            Pay pay = new Pay();
+            pay.Total = total;
         }
     }
 }

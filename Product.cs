@@ -14,23 +14,25 @@ namespace Kassasystem
 
     public class Product
     {
-        int _productId;
-        string _productName;
-        float _price;
-        SellingType _sellingType;
+        public int ProductId { get; set; }
+        public string ProductName { get; set; }
+        public float Price { get; set; }
+        public SellingType SellType { get; set; }
+        public float Amount { get; set; }
 
 
         public Product(int productId, string productName, float price, SellingType sellingType)
         {
-            _productId = productId;
-            _productName = productName;
-            _price = price;
-            _sellingType = sellingType;
+            ProductId = productId;
+            ProductName = productName;
+            Price = price;
+            SellType = sellingType;
         }
 
-        public int ProductId { get { return _productId; } }
-        public string ProductName { get { return _productName; } }
-        public float Price { get { return _price; } }
-        public SellingType SellingType { get { return _sellingType; } }
+
+
     }
+
+
+
 }
