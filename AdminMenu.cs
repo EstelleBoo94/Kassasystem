@@ -8,20 +8,21 @@ namespace Kassasystem
 {
     public class AdminMenu
     {
+        ProductList productList;
 
-        Admin admin;
-
-        public void MoveAdmin(Admin adminIn)
+        public AdminMenu(ProductList _productList)
         {
-            admin = adminIn;
+            productList = _productList;
         }
+
 
         public void ShowAdminMenu()
         {
+            AdminProducts adminProd = new AdminProducts();
 
             List<string> menuOptions = new List<string>
             {
-            "Lägg till ny produkt", "Ta bort produkt", "Lägg till ny kampanj", "Ta bort kampanj"
+            "Lägg till ny produkt", "Ta bort produkt", "Ändra produkt", "Visa produktlista", "Lägg till ny kampanj", "Ta bort kampanj", "Visa pågående kampanjer"
             };
 
             int selection = 0;
@@ -74,6 +75,7 @@ namespace Kassasystem
                     }
                 }
 
+
                 else if (keyInput.Key == ConsoleKey.Enter)
                 {
                     if (selection == menuOptions.Count)
@@ -82,7 +84,7 @@ namespace Kassasystem
                     }
                     else if (selection == 0)
                     {
-                        admin.AdminAddNewProduct();
+                        adminProd.AdminAddNewProduct();
                     }
                     else if (selection == 1)
                     {
@@ -90,19 +92,36 @@ namespace Kassasystem
                     }
                     else if (selection == 2)
                     {
-                        Console.WriteLine("Här finns lägg till kampanj");
+                        adminProd.AdminChangeProduct();
                     }
                     else if (selection == 3)
                     {
+                        Console.Clear();
+                        productList.PrintProductList();
+                        Console.WriteLine("\nTryck valfri tangent för att återgå till menyn.");
+                        Console.ReadKey();
+                    }
+                    else if (selection == 4)
+                    {
+                        Console.WriteLine("Här finns lägg till kampanj");
+                    }
+                    else if (selection == 5)
+                    {
                         Console.WriteLine("Här finns ta bort kampanj");
+                    }
+                    else if (selection == 6)
+                    {
+                        Console.WriteLine("Här visas kampanjer");
                     }
                 }
 
 
             }
 
-            Console.WriteLine("Kassan stängs ner... Tryck valfri tangent för att avsluta helt.");
+            Console.WriteLine("Tryck valfri tangent för att återgå till startmenyn.");
             Console.ReadKey();
+            StartMenu startMenu = new StartMenu();
+            startMenu.ShowMenu();
 
         }
     }

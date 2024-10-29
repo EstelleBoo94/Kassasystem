@@ -9,19 +9,22 @@ namespace Kassasystem
 
     internal class NewCustomer
     {
+
+        ProductList productList;
+
+        public NewCustomer(ProductList _productList)
+        {
+            productList = _productList;
+        }
+
         public void StartPurchase()
         {
 
             Console.Clear();
 
             Receipt receipt = new Receipt();
-            ProductList productList = new ProductList();
-            Admin admin = new Admin();
-            AdminMenu adminMenu = new AdminMenu();
-            productList.MoveReceipt(receipt);
-            admin.MoveProductList(productList);
-            adminMenu.MoveAdmin(admin);
 
+           
             Console.WriteLine("Ange säljare eller säljarnummer:");
             string sellerID = Console.ReadLine();
 
@@ -53,7 +56,7 @@ namespace Kassasystem
                 int findID = Convert.ToInt32(whatProduct[0]);
                 float amount = Convert.ToSingle(whatProduct[1]);
 
-                productList.FindProduct(findID, amount);
+                productList.FindProductToReceipt(findID, amount, receipt);
 
             }
 

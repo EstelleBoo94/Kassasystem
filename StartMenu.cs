@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Kassasystem.ReadingProductList;
 
 namespace Kassasystem
 {
     public class StartMenu
     {
+
         public void ShowMenu()
         {
+            ProductList productList = new ProductList(ReadProductListFromFile("../../../ListOfProducts.txt"));
+            productList.InitiateProductList();
+            //productList.WriteProductListToFile("../../../ListOfProducts.txt");
 
             List<string> menuOptions = new List<string>
             {
@@ -28,7 +33,8 @@ namespace Kassasystem
                 {
                     if (i == selection) 
                     { 
-                        Console.BackgroundColor = ConsoleColor.Green; 
+                        Console.BackgroundColor = ConsoleColor.Green;
+                        Console.ForegroundColor = ConsoleColor.Black;
                     }
 
                     Console.WriteLine(menuOptions[i]);
@@ -39,6 +45,7 @@ namespace Kassasystem
                 if (selection == menuOptions.Count)
                 {
                     Console.BackgroundColor = ConsoleColor.Green;
+                    Console.ForegroundColor = ConsoleColor.Black;
                 }
                 Console.WriteLine("Avsluta");
                 Console.ResetColor();
@@ -72,12 +79,13 @@ namespace Kassasystem
                     }
                     else if (selection == 0)
                     {
-                        NewCustomer customer = new NewCustomer();
+                        NewCustomer customer = new NewCustomer(productList);
                         customer.StartPurchase();
                     }
                     else if (selection == 1)
                     {
-                        Console.WriteLine("Här finns admin");
+                        AdminMenu adminMenu = new AdminMenu(productList);
+                        adminMenu.ShowAdminMenu();
                     }
                 }
 

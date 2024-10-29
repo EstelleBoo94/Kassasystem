@@ -3,45 +3,96 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Kassasystem.ReadingProductList;
 
 namespace Kassasystem
 {
     public class ProductList
     {
+        //List<Product> productList = new List<Product>();
+        public List<Product> ProductListProp { get; set; }
 
-        List<Product> productList = new List<Product>
+        public ProductList(List<Product> productList)
         {
-          new Product(101, "äpple", 34.95f, SellingType.ByKilo),
-          new Product(102, "banan", 28.95f, SellingType.ByKilo),
-          new Product(103, "mjölk 1l", 13.50f, SellingType.ByItem),
-          new Product(104, "snabbkaffe", 78.95f, SellingType.ByItem),
-          new Product(105, "nötfärs 1kg", 120.00f, SellingType.ByItem),
-          new Product(106, "varmkorv", 37.95f, SellingType.ByItem),
-          new Product(107, "bröd", 29.95f, SellingType.ByItem),
-          new Product(108, "korvbröd", 20.95f, SellingType.ByItem),
-          new Product(109, "kakor", 21.95f, SellingType.ByItem),
-          new Product(110, "läsk", 15.95f, SellingType.ByItem),
-        };
+            ProductListProp = productList;
+        }
 
+        public void InitiateProductList()
+        {
+            ReadProductListFromFile("../../../ListOfProducts.txt");
+            if (ProductListProp.Count == 0)
+            {
+                ProductListProp.Add(new Product(101, "äpple", 34.95f, SellingType.ByKilo));
+                ProductListProp.Add(new Product(102, "banan", 28.95f, SellingType.ByKilo));
+                ProductListProp.Add(new Product(103, "mjölk 1l", 13.50f, SellingType.ByItem));
+                ProductListProp.Add(new Product(104, "snabbkaffe", 78.95f, SellingType.ByItem));
+                ProductListProp.Add(new Product(105, "nötfärs 1kg", 120.00f, SellingType.ByItem));
+                ProductListProp.Add(new Product(106, "varmkorv", 37.95f, SellingType.ByItem));
+                ProductListProp.Add(new Product(107, "bröd", 29.95f, SellingType.ByItem));
+                ProductListProp.Add(new Product(108, "korvbröd", 20.95f, SellingType.ByItem));
+                ProductListProp.Add(new Product(109, "kakor", 21.95f, SellingType.ByItem));
+                ProductListProp.Add(new Product(110, "läsk", 15.95f, SellingType.ByItem));
+
+                WriteProductListToFile("../../../ListOfProducts.txt");
+            }
+        }
+
+
+        public void WriteProductListToFile(string filePath)
+        {
+            using (StreamWriter writer = new StreamWriter(filePath)) 
+            {
+                foreach (Product product in ProductListProp) 
+                {
+                    writer.WriteLine(product.ToString());
+                }
+            }
+        }
+
+        //public List<Product> ReadProductListFromFile(string filePath)
+        //{
+        //    List<Product> readProductList = new List<Product>();
+        //    using (StreamReader reader = new StreamReader(filePath))
+        //    {
+        //        string line;
+        //        while ((line = reader.ReadLine()) != null)
+        //        {
+        //            readProductList.Add(Product.FromString(line));
+        //        }
+        //    }
+        //    ProductListTest = readProductList;
+        //    return ProductListTest;
+        //}
 
         public int GetNextProductID()
         {
-            if (productList.Count == 0)
+            if (ProductListProp.Count == 0)
             {
                 return 100;
             }
 
-            return productList.Max(p => p.ProductId) + 1;
+            return ProductListProp.Max(p => p.ProductId) + 1;
         }
 
         public void AddNewProduct(Product newProduct)
         {
-            productList.Add(newProduct);
+            ProductListProp.Add(newProduct);
+        }
+
+        public void ReplaceProduct(int productIdCheck, Product updatedProduct)
+        {
+            int index = ProductListProp.FindIndex(item => item.ProductId == productIdCheck);
+
+            if (index != -1)
+            {
+                ProductListProp[index] = updatedProduct;
+            }
         }
 
         public void PrintProductList()
         {
-            foreach (Product product in productList)
+            ProductListProp = ReadProductListFromFile("../../../ListOfProducts.txt");
+            foreach (Product product in ProductListProp)
             {
                 string type;
                 if (product.SellType == SellingType.ByKilo)
@@ -56,21 +107,35 @@ namespace Kassasystem
             }
         }
 
-        Receipt receipt;
-
-        public void MoveReceipt(Receipt receiptIn)
+        public void FindProductToReceipt(int findID, float amount, Receipt receipt)
         {
-            receipt = receiptIn;
-        }
-
-        public void FindProduct(int findID, float amount)
-        {
-            foreach (Product product in productList)
+            foreach (Product product in ProductListProp)
             {
                 if (findID == product.ProductId)
                 {
                     product.Amount = amount;
                     receipt.AddToReceipt(product);
+                }
+
+            }
+        }
+
+        public void FindProductToPrint(int findID)
+        {
+            foreach (Product product in ProductListProp)
+            {
+                if (findID == product.ProductId)
+                {
+                    string type;
+                    if (product.SellType == SellingType.ByKilo)
+                    {
+                        type = "kilopris";
+                    }
+                    else
+                    {
+                        type = "styckpris";
+                    }
+                    Console.WriteLine($"{product.ProductId}, {product.ProductName}, {product.Price}, {type}");
                 }
 
             }

@@ -1,0 +1,11 @@
+101:   äpple: 34,95: kilopris
+102:   banan: 28,95: kilopris
+103:   mjölk 1l: 13,5: kilopris
+104:   snabbkaffe: 78,95: kilopris
+105:   nötfärs 1kg: 120: kilopris
+106:   varmkorv: 37,95: kilopris
+107:   bröd: 29,95: kilopris
+108:   korvbröd: 20,95: kilopris
+109:   kakor: 21,95: kilopris
+110:   läsk: 15,95: kilopris
+111: hundbajspåsar: 34,95: styckpris
