@@ -16,7 +16,10 @@ namespace Kassasystem
                 string line;
                 while ((line = reader.ReadLine()) != null)
                 {
-                    readProductList.Add(Product.FromString(line));
+                    if (!string.IsNullOrWhiteSpace(line))
+                    {
+                        readProductList.Add(Product.FromString(line));
+                    }
                 }
             }
             //productList = readProductList;

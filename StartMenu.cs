@@ -79,12 +79,12 @@ namespace Kassasystem
                     }
                     else if (selection == 0)
                     {
-                        NewCustomer customer = new NewCustomer(productList);
+                        NewCustomer customer = new NewCustomer();
                         customer.StartPurchase();
                     }
                     else if (selection == 1)
                     {
-                        AdminMenu adminMenu = new AdminMenu(productList);
+                        AdminMenu adminMenu = new AdminMenu();
                         adminMenu.ShowAdminMenu();
                     }
                 }

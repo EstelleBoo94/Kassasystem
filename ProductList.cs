@@ -9,7 +9,6 @@ namespace Kassasystem
 {
     public class ProductList
     {
-        //List<Product> productList = new List<Product>();
         public List<Product> ProductListProp { get; set; }
 
         public ProductList(List<Product> productList)
@@ -49,20 +48,6 @@ namespace Kassasystem
             }
         }
 
-        //public List<Product> ReadProductListFromFile(string filePath)
-        //{
-        //    List<Product> readProductList = new List<Product>();
-        //    using (StreamReader reader = new StreamReader(filePath))
-        //    {
-        //        string line;
-        //        while ((line = reader.ReadLine()) != null)
-        //        {
-        //            readProductList.Add(Product.FromString(line));
-        //        }
-        //    }
-        //    ProductListTest = readProductList;
-        //    return ProductListTest;
-        //}
 
         public int GetNextProductID()
         {
@@ -77,6 +62,16 @@ namespace Kassasystem
         public void AddNewProduct(Product newProduct)
         {
             ProductListProp.Add(newProduct);
+        }
+
+        public void RemoveProduct(int productIdCheck)
+        {
+            int index = ProductListProp.FindIndex(item => item.ProductId == productIdCheck);
+
+            if (index != -1)
+            {
+                ProductListProp.RemoveAt(index);
+            }
         }
 
         public void ReplaceProduct(int productIdCheck, Product updatedProduct)

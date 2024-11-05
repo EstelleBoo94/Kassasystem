@@ -1,31 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using static Kassasystem.ReadingProductList;
 
 namespace Kassasystem
 {
     public class AdminProducts
     {
-        //List<Product> productList = ReadProductListFromFile("../../../ListOfProducts.txt");
-        //ProductList productList;
-
-        //public void ReferToProductList(ProductList productListIn)
-        //{
-        //    productList = productListIn;
-        //}
         ProductList productList = new ProductList(ReadProductListFromFile("../../../ListOfProducts.txt"));
 
         public void AdminAddNewProduct()
         {
-            Console.WriteLine("Ange namn på produkten:");
-            string name = Console.ReadLine();
-            Console.WriteLine("Ange pris på produkten:");
-            float price = Convert.ToSingle(Console.ReadLine());
-            Console.WriteLine("Har produkten kilopris? Ja/Nej");
-            string sellingTypeInput = Console.ReadLine();
+            Console.Clear();
+            
+            string name = InputValidator.GetNonEmptyString("Ange namn på produkten:");
+            float price = InputValidator.GetValidFloat("Ange pris på produkten:");
+            string sellingTypeInput = InputValidator.GetValidYesOrNo("Har produkten kilopris? Ja/Nej");
             int productID = productList.GetNextProductID();
             if (sellingTypeInput.ToLower() == "ja")
             {
@@ -48,17 +42,20 @@ namespace Kassasystem
 
         }
 
-        public void AdminChangeProduct()
+        public void AdminEditProduct()
         {
+            Console.Clear ();
+
             productList.PrintProductList();
 
-            Console.WriteLine("Ange produktId på produkten du vill ändra:");
-            int productIdInput = Convert.ToInt32(Console.ReadLine());
+            int productIdInput = InputValidator.GetValidProductID
+                ("Ange produktId på produkten du vill ändra:");
 
+            Console.Clear();
             productList.FindProductToPrint(productIdInput);
 
-            Console.WriteLine("\nAnge uppdaterad information enligt mallen:\n[Produktnamn Pris Kilo/Styck]");
-            string update = Console.ReadLine();
+            string update = InputValidator.GetValidInputForEditProduct
+                ("\nAnge uppdaterad information enligt mallen:\n[Produktnamn Pris Kilo/Styck]");
 
             string[] whatProduct = update.Split(" ");
             string newName = whatProduct[0];
@@ -88,7 +85,30 @@ namespace Kassasystem
 
         public void AdminRemoveProduct()
         {
+            Console.Clear();
 
+            productList.PrintProductList();
+
+            int productIdInput = InputValidator.GetValidProductID
+                ("Ange produktId på produkten du vill ta bort:");
+
+            Console.Clear();
+            productList.FindProductToPrint(productIdInput);
+
+            string deleteThis = InputValidator.GetValidYesOrNo("Vill du ta bort den här produkten helt? Ja/Nej");
+            if (deleteThis.ToLower() == "ja")
+            {
+                productList.RemoveProduct(productIdInput);
+                productList.WriteProductListToFile("../../../ListOfProducts.txt");
+                Console.WriteLine($"Produkten är borttagen." +
+                    $"\n Tryck valfri tangent för att fortsätta.");
+                Console.ReadKey();
+            }
+            else
+            {
+                Console.WriteLine("Tryck valfri tangent för att återgå till menyn.");
+                Console.ReadKey();
+            }
         }
 
 

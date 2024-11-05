@@ -6,7 +6,7 @@
         static void Main(string[] args)
         {
             
-
+            //Kom ihåg! Felhantering när man söker produktId. Vad händer om man anger för högt/lågt?
             StartMenu startMenu = new StartMenu();
 
             startMenu.ShowMenu();

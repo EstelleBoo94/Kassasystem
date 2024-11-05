@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Kassasystem.ReadingProductList;
 
 namespace Kassasystem
 {
@@ -10,12 +11,8 @@ namespace Kassasystem
     internal class NewCustomer
     {
 
-        ProductList productList;
-
-        public NewCustomer(ProductList _productList)
-        {
-            productList = _productList;
-        }
+        ProductList productList = new ProductList
+            (ReadProductListFromFile("../../../ListOfProducts.txt"));
 
         public void StartPurchase()
         {
@@ -24,9 +21,9 @@ namespace Kassasystem
 
             Receipt receipt = new Receipt();
 
-           
-            Console.WriteLine("Ange säljare eller säljarnummer:");
-            string sellerID = Console.ReadLine();
+
+            string sellerID = InputValidator.GetNonEmptyString
+                ("Ange säljare eller säljarnummer:");
 
             receipt.SellerId = sellerID;
 
@@ -40,12 +37,13 @@ namespace Kassasystem
 
                 receipt.GetReceiptList();
 
-                Console.WriteLine("\nAnge produkt-ID och antal (vikt i kilo om kilopris) med mellanslag emellan:\n*Ange Betala för att slutföra köpet*\n");
-                string input = Console.ReadLine().ToLower();
+                string input = InputValidator.GetValidItemForPurchase
+                    ("\nAnge produkt-ID och antal (vikt i kilo om kilopris) med mellanslag emellan:" +
+                    "\n*Ange Betala för att slutföra köpet*\n");
 
                 Pay pay1 = new Pay();
 
-                if (input == "betala")
+                if (input.ToLower() == "betala")
                 {
                     pay1.ConfirmPayment();
                     pay = true;

@@ -3,18 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Kassasystem.ReadingProductList;
 
 namespace Kassasystem
 {
     public class AdminMenu
     {
-        ProductList productList;
-
-        public AdminMenu(ProductList _productList)
-        {
-            productList = _productList;
-        }
-
+        ProductList productList = new ProductList(ReadProductListFromFile("../../../ListOfProducts.txt"));
 
         public void ShowAdminMenu()
         {
@@ -88,11 +83,11 @@ namespace Kassasystem
                     }
                     else if (selection == 1)
                     {
-                        Console.WriteLine("Här finns ta bort produkt");
+                        adminProd.AdminRemoveProduct();
                     }
                     else if (selection == 2)
                     {
-                        adminProd.AdminChangeProduct();
+                        adminProd.AdminEditProduct();
                     }
                     else if (selection == 3)
                     {
