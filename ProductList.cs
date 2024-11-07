@@ -39,6 +39,14 @@ namespace Kassasystem
 
         public void WriteProductListToFile(string filePath)
         {
+
+            if (!File.Exists(filePath))
+            {
+                using (StreamWriter writer = new StreamWriter(filePath))
+                {
+                }
+            }
+
             using (StreamWriter writer = new StreamWriter(filePath)) 
             {
                 foreach (Product product in ProductListProp) 
@@ -109,7 +117,7 @@ namespace Kassasystem
                 if (findID == product.ProductId)
                 {
                     product.Amount = amount;
-                    receipt.AddToReceipt(product);
+                    ReceiptListClass.AddToReceipt(product);
                 }
 
             }

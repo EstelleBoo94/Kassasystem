@@ -22,7 +22,7 @@ namespace Kassasystem
                     }
                 }
             }
-            //productList = readProductList;
+            
             return readProductList;
         }
     }

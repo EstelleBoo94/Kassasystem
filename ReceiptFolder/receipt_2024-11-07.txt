@@ -1,0 +1,78 @@
+KVITTON FÖR 2024-11-07
+
+#####################
+**KVITTO**
+
+Säljare: test123
+Datum: 2024-11-07
+Kvittonummer: System.Func`1[System.Int32]
+---------------------
+
+ äpple 1 kg 34,95 kr
+ mjölk 1l 2 st 27 kr
+
+---------------------
+SUMMA: 61,95 SEK
+
+#####################
+#####################
+**KVITTO**
+
+Säljare: säljBäst
+Datum: 2024-11-07
+Kvittonummer: System.Func`1[System.Int32]
+---------------------
+
+ äpple 1 kg 34,95 kr
+ mjölk 1l 2 st 27 kr
+ läsk 2 st 31,9 kr
+ snabbkaffe 3 st 236,84999 kr
+ äpple 2 kg 69,9 kr
+
+---------------------
+SUMMA: 400,59998 SEK
+
+#####################
+#####################
+**KVITTO**
+
+Säljare: bdjk
+Datum: 2024-11-07
+Kvittonummer: System.Func`1[System.String]
+---------------------
+
+ äpple 1 kg 34,95 kr
+
+---------------------
+SUMMA: 34,95 SEK
+
+#####################
+#####################
+**KVITTO**
+
+Säljare: dgk
+Datum: 2024-11-07
+Kvittonummer: 1
+---------------------
+
+ äpple 1 kg 34,95 kr
+
+---------------------
+SUMMA: 34,95 SEK
+
+#####################
+#####################
+**KVITTO**
+
+Säljare: fbjk
+Datum: 2024-11-07
+Kvittonummer: 2
+---------------------
+
+ äpple 1 kg 34,95 kr
+ mjölk 1l 2 st 27 kr
+
+---------------------
+SUMMA: 61,95 SEK
+
+#####################

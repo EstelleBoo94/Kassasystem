@@ -3,28 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Kassasystem.ReadingProductList;
 
 namespace Kassasystem
 {
-    public class StartMenu
+    public class PayMenu
     {
         //private Receipt _receipt;
         //private Pay _pay;
-        //public StartMenu(/*Receipt receipt,*/ Pay pay)
+        //public PayMenu(/*Receipt receipt, */Pay pay)
         //{
         //    //_receipt = receipt;
         //    _pay = pay;
         //}
 
-        public void ShowMenu()
+        public void ShowPayMenu()
         {
-            ProductList productList = new ProductList(ReadProductListFromFile("../../../ListOfProducts.txt"));
-            productList.InitiateProductList();
-
-            List<string> menuOptions = new List<string>
+            Pay pay = new Pay();
+            List<string> paymentOptions = new List<string>
             {
-            "Ny kund", "Admin"
+            "Kort", "Kontant"
             };
 
             int selection = 0;
@@ -35,25 +32,23 @@ namespace Kassasystem
                 Console.Clear();
                 Console.WriteLine("Välj alternativ med piltangenterna:");
 
-                for (int i = 0; i < menuOptions.Count; i++) 
+                for (int i = 0; i < paymentOptions.Count; i++)
                 {
-                    if (i == selection) 
-                    { 
+                    if (i == selection)
+                    {
                         Console.BackgroundColor = ConsoleColor.Green;
-                        Console.ForegroundColor = ConsoleColor.Black;
                     }
 
-                    Console.WriteLine(menuOptions[i]);
+                    Console.WriteLine(paymentOptions[i]);
 
                     Console.ResetColor();
                 }
 
-                if (selection == menuOptions.Count)
+                if (selection == paymentOptions.Count)
                 {
                     Console.BackgroundColor = ConsoleColor.Green;
-                    Console.ForegroundColor = ConsoleColor.Black;
                 }
-                Console.WriteLine("Avsluta");
+                Console.WriteLine("Avbryt köp");
                 Console.ResetColor();
 
 
@@ -64,14 +59,14 @@ namespace Kassasystem
                     selection--;
                     if (selection < 0)
                     {
-                        selection = menuOptions.Count;
+                        selection = paymentOptions.Count;
                     }
                 }
 
-                else if (keyInput.Key == ConsoleKey.DownArrow) 
-                { 
+                else if (keyInput.Key == ConsoleKey.DownArrow)
+                {
                     selection++;
-                    if (selection > menuOptions.Count)
+                    if (selection > paymentOptions.Count)
                     {
                         selection = 0;
                     }
@@ -79,29 +74,38 @@ namespace Kassasystem
 
                 else if (keyInput.Key == ConsoleKey.Enter)
                 {
-                    if (selection == menuOptions.Count)
+                    if (selection == paymentOptions.Count)
                     {
-                        inMenu = false;
+                        Console.WriteLine("Är du säker på att du vill avbryta köpet? Ja/Nej");
+                        string input = Console.ReadLine();
+                        if (input == "ja")
+                        {
+                            inMenu = false;
+                            break;
+                        }
+
                     }
+                    
                     else if (selection == 0)
                     {
-                        NewCustomer customer = new NewCustomer();
-                        customer.StartPurchase();
+                        pay.PayCard();
+                        inMenu = false;
+                        break;
                     }
                     else if (selection == 1)
                     {
-                        AdminMenu adminMenu = new AdminMenu();
-                        adminMenu.ShowAdminMenu();
+                        
+                        pay.PayCash();
+                        inMenu = false;
+                        break;
                     }
                 }
 
 
             }
 
-            Console.WriteLine("Kassan stängs ner... Tryck valfri tangent för att avsluta helt.");
+            Console.WriteLine("Tryck valfri tangent för att återgå till huvudmenyn.");
             Console.ReadKey();
-
         }
-
     }
 }

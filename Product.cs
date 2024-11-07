@@ -35,17 +35,18 @@ namespace Kassasystem
             {
                 return $"{ProductId}: {ProductName}: {Price}: styckpris";
             }
-            else
+            else 
             {
                 return $"{ProductId}: {ProductName}: {Price}: kilopris";
             }
 
         }
 
+
         public static Product FromString(string reading)
         {
             string[] parts = reading.Split(':');
-            if (parts[3] == "styckpris")
+            if (parts[3].Trim() == "styckpris")
             {
                 return new Product
                     (

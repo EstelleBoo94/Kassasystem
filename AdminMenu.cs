@@ -7,8 +7,17 @@ using static Kassasystem.ReadingProductList;
 
 namespace Kassasystem
 {
+
     public class AdminMenu
     {
+        //private Receipt _receipt;
+        //private Pay _pay;
+        //public AdminMenu(/*Receipt receipt, */Pay pay)
+        //{
+        //    //_receipt = receipt;
+        //    _pay = pay;
+        //}
+
         ProductList productList = new ProductList(ReadProductListFromFile("../../../ListOfProducts.txt"));
 
         public void ShowAdminMenu()

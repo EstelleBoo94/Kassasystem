@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,9 +9,16 @@ using static Kassasystem.ReadingProductList;
 namespace Kassasystem
 {
 
-    internal class NewCustomer
+    public class NewCustomer
     {
-
+        //private Receipt _receipt;
+        //private Pay _pay;
+        //public NewCustomer(/*Receipt receipt*/ Pay pay)
+        //{
+        //    //_receipt = receipt;
+        //    _pay = pay;
+        //}
+        
         ProductList productList = new ProductList
             (ReadProductListFromFile("../../../ListOfProducts.txt"));
 
@@ -25,28 +33,28 @@ namespace Kassasystem
             string sellerID = InputValidator.GetNonEmptyString
                 ("Ange säljare eller säljarnummer:");
 
-            receipt.SellerId = sellerID;
+            Receipt.SellerId = sellerID;
 
-            
-            bool pay = false;
-            while (pay == false)
+
+            bool payValid = false;
+            while (payValid == false)
             {
                 Console.Clear();
 
                 productList.PrintProductList();
 
-                receipt.GetReceiptList();
+                receipt.PrintReceiptList();
 
                 string input = InputValidator.GetValidItemForPurchase
                     ("\nAnge produkt-ID och antal (vikt i kilo om kilopris) med mellanslag emellan:" +
-                    "\n*Ange Betala för att slutföra köpet*\n");
+                    "\n*Ange Pay för att slutföra köpet*\n");
 
-                Pay pay1 = new Pay();
+                PayMenu payMenu = new PayMenu();
 
-                if (input.ToLower() == "betala")
+                if (input.ToLower() == "pay")
                 {
-                    pay1.ConfirmPayment();
-                    pay = true;
+                    payMenu.ShowPayMenu();
+                    payValid = true;
                     break;
                 }
 

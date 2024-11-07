@@ -77,7 +77,7 @@ namespace Kassasystem
                 Console.WriteLine(prompt);
                 string input = Console.ReadLine();
 
-                if (input.ToLower() == "betala")
+                if (input.ToLower() == "pay")
                 {
                     return input;
                 }
