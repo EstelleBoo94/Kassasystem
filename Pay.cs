@@ -25,6 +25,7 @@ namespace Kassasystem
         {
             Console.WriteLine("\nBetalningen genomfördes.\n");
             WriteReceiptToTxt.WriteReceiptToFile(ReceiptListClass.GetReceiptList(), Receipt.Total);
+            ReceiptListClass.ClearReceiptList();
         }
 
         public void PayCash()
@@ -50,6 +51,7 @@ namespace Kassasystem
                 $"\n{Twenty} tjugolappar\n{Ten} tiokronor\n{one} enkronor.");
 
             WriteReceiptToTxt.WriteReceiptToFile(ReceiptListClass.GetReceiptList(), Receipt.Total);
+            ReceiptListClass.ClearReceiptList();
 
         }
 

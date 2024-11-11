@@ -4,21 +4,13 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Kassasystem.ReadingProductList;
+using static Kassasystem.ReadingFromFile;
 
 namespace Kassasystem
 {
 
     public class NewCustomer
     {
-        //private Receipt _receipt;
-        //private Pay _pay;
-        //public NewCustomer(/*Receipt receipt*/ Pay pay)
-        //{
-        //    //_receipt = receipt;
-        //    _pay = pay;
-        //}
-        
         ProductList productList = new ProductList
             (ReadProductListFromFile("../../../ListOfProducts.txt"));
 

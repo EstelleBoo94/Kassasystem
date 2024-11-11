@@ -8,14 +8,6 @@ namespace Kassasystem
 {
     public class PayMenu
     {
-        //private Receipt _receipt;
-        //private Pay _pay;
-        //public PayMenu(/*Receipt receipt, */Pay pay)
-        //{
-        //    //_receipt = receipt;
-        //    _pay = pay;
-        //}
-
         public void ShowPayMenu()
         {
             Pay pay = new Pay();

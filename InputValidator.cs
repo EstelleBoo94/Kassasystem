@@ -54,6 +54,21 @@ namespace Kassasystem
             }
         }
 
+        public static DateTime GetValidDate(string prompt) 
+        { 
+            while(true)
+            {
+                Console.WriteLine(prompt);
+                string input = Console.ReadLine();
+                if (DateTime.TryParse(input, out DateTime result))
+                {
+                    return result;
+                }
+                Console.Clear();
+                Console.WriteLine("Ogiltig inmatning. Ange datum yyyy-MM-dd");
+            }
+        }
+
         public static int GetValidProductID(string prompt)
         {
             int result;
@@ -122,5 +137,6 @@ namespace Kassasystem
 
             }
         }
+
     }
 }

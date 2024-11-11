@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Channels;
 using System.Threading.Tasks;
-using static Kassasystem.ReadingProductList;
+using static Kassasystem.ReadingFromFile;
 
 namespace Kassasystem
 {
@@ -110,6 +111,7 @@ namespace Kassasystem
             }
         }
 
+
         public void FindProductToReceipt(int findID, float amount, Receipt receipt)
         {
             foreach (Product product in ProductListProp)
@@ -142,6 +144,36 @@ namespace Kassasystem
                 }
 
             }
+        }
+
+        public List<Product> ProductListToCampaign()
+        {
+            List<Product> productsToCampaign = new List<Product>();
+
+            bool addMore = true;
+            while (addMore == true)
+            {
+                int findProductId = InputValidator.GetValidProductID("Ange produktId på produkten som ska ingå i kampanjen:");
+                foreach (Product product in ProductListProp)
+                {
+                    if (product.ProductId == findProductId)
+                    {
+                        productsToCampaign.Add(product);
+                        break;
+                    }
+                }
+
+                string confirm = InputValidator.GetValidYesOrNo("Vill du lägga till fler produkter till kampanjen? Ja/Nej");
+                if (confirm == "ja")
+                {
+                    continue;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            return productsToCampaign;
         }
 
     }

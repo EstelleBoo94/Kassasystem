@@ -3,17 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Kassasystem.ReadingFromFile;
 
 namespace Kassasystem
 {
     public class WriteReceiptToTxt
     {
-        //public static string SellerId { get; set; }
 
         public static void WriteReceiptToFile(List<Product> receiptList, float total)
         {
-            ReadReceiptFile readReceiptFile = new ReadReceiptFile();
-            int receiptNumber = readReceiptFile.GetReceiptNumber();
+            int receiptNumber = GetReceiptNumber();
             string filePath = $"../../../ReceiptFolder/receipt_{DateTime.Now:yyyy-MM-dd}.txt";
 
             string directoryPath = Path.GetDirectoryName(filePath);

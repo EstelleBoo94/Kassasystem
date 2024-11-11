@@ -20,5 +20,10 @@ namespace Kassasystem
         {
             ReceiptList.Add(product);
         }
+
+        public static void ClearReceiptList()
+        {
+            ReceiptList.Clear();
+        }
     }
 }

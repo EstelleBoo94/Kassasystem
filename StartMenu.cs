@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Kassasystem.ReadingProductList;
+using static Kassasystem.ReadingFromFile;
 
 namespace Kassasystem
 {

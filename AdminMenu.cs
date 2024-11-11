@@ -3,26 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Kassasystem.ReadingProductList;
+using static Kassasystem.ReadingFromFile;
 
 namespace Kassasystem
 {
 
     public class AdminMenu
     {
-        //private Receipt _receipt;
-        //private Pay _pay;
-        //public AdminMenu(/*Receipt receipt, */Pay pay)
-        //{
-        //    //_receipt = receipt;
-        //    _pay = pay;
-        //}
-
         ProductList productList = new ProductList(ReadProductListFromFile("../../../ListOfProducts.txt"));
 
         public void ShowAdminMenu()
         {
             AdminProducts adminProd = new AdminProducts();
+            AdminCampaign adminCampaign = new AdminCampaign();
 
             List<string> menuOptions = new List<string>
             {
@@ -107,15 +100,18 @@ namespace Kassasystem
                     }
                     else if (selection == 4)
                     {
-                        Console.WriteLine("Här finns lägg till kampanj");
+                        adminCampaign.AdminAddNewCampaign();
                     }
                     else if (selection == 5)
                     {
-                        Console.WriteLine("Här finns ta bort kampanj");
+                        adminCampaign.AdminRemoveCampaign();
                     }
                     else if (selection == 6)
                     {
-                        Console.WriteLine("Här visas kampanjer");
+                        Console.Clear();
+                        adminCampaign.PrintCampaignListToMenu();
+                        Console.WriteLine("\nTryck valfri tangent för att återgå till menyn.");
+                        Console.ReadKey();
                     }
                 }
 
