@@ -54,7 +54,7 @@ namespace Kassasystem
 
                 string[] whatProduct = input.Split(" ");
                 int findID = Convert.ToInt32(whatProduct[0]);
-                float amount = Convert.ToSingle(whatProduct[1]);
+                short amount = Convert.ToInt16(whatProduct[1]);
                 bool productInExistance = InputValidator.CheckIfProductExists(findID, ReadProductListFromFile("../../../ListOfProducts.txt"));
                 if (productInExistance == false)
                 {
@@ -66,7 +66,7 @@ namespace Kassasystem
                 {
                     productList.FindProductToReceipt(findID, amount, receipt);
                 }
-
+                
             }
 
 

@@ -17,25 +17,26 @@ namespace Kassasystem
 
         public void PayCash()
         {
-            Console.WriteLine($"Hur mycket betalar kunden? Summa att betala: {Receipt.Total}");
-            float payment = Convert.ToSingle(Console.ReadLine());
+            Console.Clear();
+            int payment = InputValidator.GetValidInt($"Hur mycket betalar kunden? Summa att betala: {Receipt.Total:F2}");
 
-            float money = payment - Receipt.Total;
+            int roundedTotal = (int)Math.Round(Receipt.Total);
+            int money = payment - roundedTotal;
 
-            float Fivehundred = money / 500;
-            float RestFivehundred = money % 500;
-            float Hundred = RestFivehundred / 100;
-            float RestHundred = RestFivehundred % 100;
-            float Fifty = RestHundred / 50;
-            float RestFifty = RestHundred % 50;
-            float Twenty = RestFifty / 20;
-            float RestTwenty = RestFifty % 20;
-            float Ten = RestTwenty / 10;
-            float RestTen = RestTwenty % 10;
-            float one = RestTen / 1;
+            int Fivehundred = money / 500;
+            int RestFivehundred = money % 500;
+            int Hundred = RestFivehundred / 100;
+            int RestHundred = RestFivehundred % 100;
+            int Fifty = RestHundred / 50;
+            int RestFifty = RestHundred % 50;
+            int Twenty = RestFifty / 20;
+            int RestTwenty = RestFifty % 20;
+            int Ten = RestTwenty / 10;
+            int RestTen = RestTwenty % 10;
+            int one = RestTen / 1;
             Console.WriteLine($"Kunden ska få tillbaka: \n{Fivehundred}" +
-                $" femhundringar\n{Hundred} hundralappar\n{Fifty} femtiolappar" +
-                $"\n{Twenty} tjugolappar\n{Ten} tiokronor\n{one} enkronor.");
+                $" x femhundrasedlar\n{Hundred} x etthundrasedlar\n{Fifty} x femtiosedlar" +
+                $"\n{Twenty} x tjugosedlar\n{Ten} x tiokronor\n{one} x enkronor.");
 
             WriteReceiptToTxt.WriteReceiptToFile(ReceiptListClass.GetReceiptList());
             ReceiptListClass.ClearReceiptList();

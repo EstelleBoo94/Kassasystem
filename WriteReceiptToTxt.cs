@@ -15,7 +15,7 @@ namespace Kassasystem
         {
             int receiptNumber = GetReceiptNumber();
             string filePath = $"../../../ReceiptFolder/receipt_{DateTime.Now:yyyy-MM-dd}.txt";
-            float total = 0;
+            decimal total = 0;
 
             string directoryPath = Path.GetDirectoryName(filePath);
             if (!Directory.Exists(directoryPath))
@@ -40,10 +40,10 @@ namespace Kassasystem
                 writer.WriteLine($"Kvittonummer: {receiptNumber}");
                 writer.WriteLine("---------------------\n");
 
-                float priceReset = 0;
+                decimal priceReset = 0;
                 foreach (Product product in receiptList)
                 {
-                    float totalDiscountPercent = 0;
+                    decimal totalDiscountPercent = 0;
                     List<Campaign> activeCampaign = CampaignList.GetActiveCampaignList();
                     bool isActive = CampaignList.IsCampaignActive();
 
@@ -61,21 +61,21 @@ namespace Kassasystem
                             }
                         }
 
-                        float campaignPrice = product.Price * (1 - totalDiscountPercent / 100);
-                        float campaignPriceTotal = campaignPrice * product.Amount;
-                        float priceTotal = product.Price * product.Amount;
+                        decimal campaignPrice = product.Price * (1 - totalDiscountPercent / 100);
+                        decimal campaignPriceTotal = campaignPrice * product.Amount;
+                        decimal priceTotal = product.Price * product.Amount;
 
                         if (product.SellType == SellingType.ByKilo)
                         {
                             writer.WriteLine($"KAMPANJVARA {product.ProductName.ToString()} {product.Amount.ToString()} kg " +
-                                $"OriginalPris {priceTotal.ToString()} kr Pris med rabatt {campaignPriceTotal.ToString()} kr");
+                                $"OriginalPris {priceTotal.ToString("F2")} kr Pris med rabatt {campaignPriceTotal.ToString("F2")} kr");
                             priceReset = product.Price;
                             product.Price = campaignPrice;
                         }
                         else if (product.SellType == SellingType.ByItem)
                         {
                             writer.WriteLine($"KAMPANJVARA {product.ProductName.ToString()} {product.Amount.ToString()} st " +
-                                $"OriginalPris {priceTotal.ToString()} kr Pris med rabatt {campaignPriceTotal.ToString()} kr");
+                                $"OriginalPris {priceTotal.ToString("F2")} kr Pris med rabatt {campaignPriceTotal.ToString("F2")} kr");
                             priceReset = product.Price;
                             product.Price = campaignPrice;
                         }
@@ -84,15 +84,15 @@ namespace Kassasystem
                     else
                     {
 
-                        float priceTotal = product.Price * product.Amount;
+                        decimal priceTotal = product.Price * product.Amount;
                         if (product.SellType == SellingType.ByKilo)
                         {
-                            writer.WriteLine($"{product.ProductName.ToString()} {product.Amount.ToString()} kg {priceTotal.ToString()} kr");
+                            writer.WriteLine($"{product.ProductName.ToString()} {product.Amount.ToString()} kg {priceTotal.ToString("F2")} kr");
                             priceReset = product.Price;
                         }
                         else if (product.SellType == SellingType.ByItem)
                         {
-                            writer.WriteLine($"{product.ProductName.ToString()} {product.Amount.ToString()} st {priceTotal.ToString()} kr");
+                            writer.WriteLine($"{product.ProductName.ToString()} {product.Amount.ToString()} st {priceTotal.ToString("F2")} kr");
                             priceReset = product.Price;
                         }
                     }
@@ -104,7 +104,7 @@ namespace Kassasystem
                     product.Price = priceReset;
                 }
                 writer.WriteLine("\n---------------------");
-                writer.WriteLine($"SUMMA: {total} SEK\n");
+                writer.WriteLine($"SUMMA: {total:F2} SEK\n");
                 writer.WriteLine("#####################");
                 writer.WriteLine("/////////////////////");
             }

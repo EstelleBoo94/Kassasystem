@@ -38,14 +38,58 @@ namespace Kassasystem
             }
         }
 
-        public static float GetValidFloat(string prompt)
+        public static short GetValidShort(string prompt)
         {
-            float result;
+            short result;
             while (true)
             {
                 Console.WriteLine(prompt);
                 string input = Console.ReadLine();
-                if (float.TryParse(input, out result))
+                if (short.TryParse(input, out result))
+                {
+                    if (result < 0)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Ogiltig inmatning. Ange en siffra över 0.");
+                        continue;
+                    }
+                    return result;
+                }
+                Console.Clear();
+                Console.WriteLine("Ogiltig inmatning.");
+            }
+        }
+
+        public static decimal GetValidDecimal(string prompt)
+        {
+            decimal result;
+            while (true)
+            {
+                Console.WriteLine(prompt);
+                string input = Console.ReadLine();
+                if (decimal.TryParse(input, out result))
+                {
+                    if (result < 0)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Ogiltig inmatning. Ange en siffra över 0.");
+                        continue;
+                    }
+                    return result;
+                }
+                Console.Clear();
+                Console.WriteLine("Ogiltig inmatning.");
+            }
+        }
+
+        public static int GetValidInt(string prompt)
+        {
+            int result;
+            while (true)
+            {
+                Console.WriteLine(prompt);
+                string input = Console.ReadLine();
+                if (int.TryParse(input, out result))
                 {
                     if (result < 0)
                     {
@@ -150,8 +194,8 @@ namespace Kassasystem
 
                     if (parts.Length == 2 && parts[0].Length == 3
                         && int.TryParse(parts[0], out _) // _ discard operator, I only need to check this value, not save it
-                        && float.TryParse(parts[1], out _)
-                        && float.Parse(parts[1]) > 0)
+                        && short.TryParse(parts[1], out _)
+                        && short.Parse(parts[1]) > 0)
                     {
                         return input;
                     }
@@ -175,8 +219,8 @@ namespace Kassasystem
                     string[] parts = input.ToLower().Split(' ');
 
                     if (parts.Length == 3
-                    && float.TryParse(parts[1], out _)
-                    && float.Parse(parts[1]) > 0
+                    && decimal.TryParse(parts[1], out _)
+                    && decimal.Parse(parts[1]) > 0
                     && parts[2] == "kilo" || parts[2] == "styck")
                     {
                         return input;

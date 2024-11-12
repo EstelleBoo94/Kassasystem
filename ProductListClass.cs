@@ -22,16 +22,16 @@ namespace Kassasystem
             ReadProductListFromFile("../../../ListOfProducts.txt");
             if (ProductListProp.Count == 0)
             {
-                ProductListProp.Add(new Product(101, "äpple", 34.95f, SellingType.ByKilo));
-                ProductListProp.Add(new Product(102, "banan", 28.95f, SellingType.ByKilo));
-                ProductListProp.Add(new Product(103, "mjölk 1l", 13.50f, SellingType.ByItem));
-                ProductListProp.Add(new Product(104, "snabbkaffe", 78.95f, SellingType.ByItem));
-                ProductListProp.Add(new Product(105, "nötfärs 1kg", 120.00f, SellingType.ByItem));
-                ProductListProp.Add(new Product(106, "varmkorv", 37.95f, SellingType.ByItem));
-                ProductListProp.Add(new Product(107, "bröd", 29.95f, SellingType.ByItem));
-                ProductListProp.Add(new Product(108, "korvbröd", 20.95f, SellingType.ByItem));
-                ProductListProp.Add(new Product(109, "kakor", 21.95f, SellingType.ByItem));
-                ProductListProp.Add(new Product(110, "läsk", 15.95f, SellingType.ByItem));
+                ProductListProp.Add(new Product(101, "äpple", 34.95m, SellingType.ByKilo));
+                ProductListProp.Add(new Product(102, "banan", 28.95m, SellingType.ByKilo));
+                ProductListProp.Add(new Product(103, "mjölk 1l", 13.50m, SellingType.ByItem));
+                ProductListProp.Add(new Product(104, "snabbkaffe", 78.95m, SellingType.ByItem));
+                ProductListProp.Add(new Product(105, "nötfärs 1kg", 120.00m, SellingType.ByItem));
+                ProductListProp.Add(new Product(106, "varmkorv", 37.95m, SellingType.ByItem));
+                ProductListProp.Add(new Product(107, "bröd", 29.95m, SellingType.ByItem));
+                ProductListProp.Add(new Product(108, "korvbröd", 20.95m, SellingType.ByItem));
+                ProductListProp.Add(new Product(109, "kakor", 21.95m, SellingType.ByItem));
+                ProductListProp.Add(new Product(110, "läsk", 15.95m, SellingType.ByItem));
 
                 WriteProductListToFile("../../../ListOfProducts.txt");
             }
@@ -112,7 +112,7 @@ namespace Kassasystem
         }
 
 
-        public void FindProductToReceipt(int findID, float amount, Receipt receipt)
+        public void FindProductToReceipt(int findID, short amount, Receipt receipt)
         {
             foreach (Product product in ProductListProp)
             {

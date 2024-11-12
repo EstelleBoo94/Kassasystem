@@ -18,7 +18,7 @@ namespace Kassasystem
             Console.Clear();
             
             string name = InputValidator.GetNonEmptyString("Ange namn på produkten:");
-            float price = InputValidator.GetValidFloat("Ange pris på produkten:");
+            decimal price = InputValidator.GetValidDecimal("Ange pris på produkten:");
             string sellingTypeInput = InputValidator.GetValidYesOrNo("Har produkten kilopris? Ja/Nej");
             int productID = productList.GetNextProductID();
             if (sellingTypeInput.ToLower() == "ja")
@@ -26,7 +26,7 @@ namespace Kassasystem
                 Product product = new Product(productID, name, price, SellingType.ByKilo);
                 productList.AddNewProduct(product);
                 productList.WriteProductListToFile("../../../ListOfProducts.txt");
-                Console.WriteLine($"Produkt {product.ProductName} som kostar {product.Price} kr per kilo har lagts till med produktID {product.ProductId}." +
+                Console.WriteLine($"Produkt {product.ProductName} som kostar {product.Price:F2} kr per kilo har lagts till med produktID {product.ProductId}." +
                     $"\n Tryck valfri tangent för att fortsätta.");
                 Console.ReadKey();
             }
@@ -35,7 +35,7 @@ namespace Kassasystem
                 Product product = new Product(productID, name, price, SellingType.ByItem);
                 productList.AddNewProduct(product);
                 productList.WriteProductListToFile("../../../ListOfProducts.txt");
-                Console.WriteLine($"Produkt {product.ProductName} som kostar {product.Price} kr styck har lagts till med produktID {product.ProductId}." +
+                Console.WriteLine($"Produkt {product.ProductName} som kostar {product.Price:F2} kr styck har lagts till med produktID {product.ProductId}." +
                     $"\n Tryck valfri tangent för att fortsätta.");
                 Console.ReadKey();
             }
@@ -59,7 +59,7 @@ namespace Kassasystem
 
             string[] whatProduct = update.Split(" ");
             string newName = whatProduct[0];
-            float newPrice = Convert.ToSingle(whatProduct[1]);
+            decimal newPrice = Convert.ToDecimal(whatProduct[1]);
             string newType = whatProduct[2];
 
             if (newType.ToLower() == "kilo")
@@ -111,6 +111,6 @@ namespace Kassasystem
             }
         }
 
-
     }
+
 }

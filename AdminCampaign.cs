@@ -21,7 +21,7 @@ namespace Kassasystem
             string name = InputValidator.GetNonEmptyString("Ange namn på kampanjen:");
             DateTime start = InputValidator.GetValidDate("Ange startdatum för kampanjen (yyyy-MM-dd):");
             DateTime end = InputValidator.GetValidDate("Ange slutdatum för kampanjen (yyyy-MM-dd):");
-            bool correctDate = false;
+            //bool correctDate = false;
             while (end <= start)
             {
                 Console.Clear();
@@ -30,14 +30,14 @@ namespace Kassasystem
                 start = InputValidator.GetValidDate("Ange startdatum för kampanjen (yyyy-MM-dd):");
                 end = InputValidator.GetValidDate("Ange slutdatum för kampanjen (yyyy-MM-dd):");
             }
-            float discount = InputValidator.GetValidFloat("Ange den procentuella rabatten (ange endast siffror):");
-            bool correctDiscount = false;
+            short discount = InputValidator.GetValidShort("Ange den procentuella rabatten (ange endast siffror):");
+            //bool correctDiscount = false;
             while (discount >= 100)
             {
                 Console.Clear();
                 Console.WriteLine("Rabatten måste vara mindre än 100.");
                 Console.ReadKey();
-                discount = InputValidator.GetValidFloat("Ange den procentuella rabatten (ange endast siffror):");
+                discount = InputValidator.GetValidShort("Ange den procentuella rabatten (ange endast siffror):");
             }
 
             productList.PrintProductList();

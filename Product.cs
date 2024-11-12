@@ -16,12 +16,12 @@ namespace Kassasystem
     {
         public int ProductId { get; set; }
         public string ProductName { get; set; }
-        public float Price { get; set; }
+        public decimal Price { get; set; }
         public SellingType SellType { get; set; }
-        public float Amount { get; set; }
+        public short Amount { get; set; }
 
 
-        public Product(int productId, string productName, float price, SellingType sellingType)
+        public Product(int productId, string productName, decimal price, SellingType sellingType)
         {
             ProductId = productId;
             ProductName = productName;
@@ -52,7 +52,7 @@ namespace Kassasystem
                     (
                     Convert.ToInt32(parts[0]),
                     parts[1],
-                    Convert.ToSingle(parts[2]),
+                    Convert.ToDecimal(parts[2]),
                     SellingType.ByItem
                     );
             }
@@ -62,7 +62,7 @@ namespace Kassasystem
                 (
                     Convert.ToInt32(parts[0]),
                     parts[1],
-                    Convert.ToSingle(parts[2]),
+                    Convert.ToDecimal(parts[2]),
                     SellingType.ByKilo
 
                 );

@@ -9,17 +9,17 @@ namespace Kassasystem
     public class Receipt
     {
         public static string SellerId { get; set; }
-        public static float Total { get; set; }
+        public static decimal Total { get; set; }
 
         public void PrintReceiptList()
         {
-            float priceReset = 0;
+            decimal priceReset = 0;
             
             Console.WriteLine($"\n**KVITTO**\nSäljare: {SellerId}\n");
 
             foreach (Product product in ReceiptListClass.GetReceiptList())
             {
-                float totalDiscountPercent = 0;
+                decimal totalDiscountPercent = 0;
                 List<Campaign> activeCampaign = CampaignList.GetActiveCampaignList();
                 bool isActive = CampaignList.IsCampaignActive();
                 
@@ -37,19 +37,19 @@ namespace Kassasystem
                         }
                     }
 
-                    float campaignPrice = product.Price * (1 - totalDiscountPercent / 100);
+                    decimal campaignPrice = product.Price * (1 - totalDiscountPercent / 100);
 
                     if (product.SellType == SellingType.ByKilo)
                     {
                         Console.WriteLine($"KAMPANJVARA {product.ProductName} {product.Amount} kg " +
-                            $"OriginalPris {product.Price * product.Amount} kr Pris med rabatt {campaignPrice * product.Amount} kr");
+                            $"OriginalPris {product.Price * product.Amount:F2} kr Pris med rabatt {campaignPrice * product.Amount:F2} kr");
                         priceReset = product.Price;
                         product.Price = campaignPrice;
                     }
                     else if (product.SellType == SellingType.ByItem)
                     {
                         Console.WriteLine($"KAMPANJVARA {product.ProductName} {product.Amount} st " +
-                            $"OriginalPris {product.Price * product.Amount} kr Pris med rabatt {campaignPrice * product.Amount} kr");
+                            $"OriginalPris {product.Price * product.Amount:F2} kr Pris med rabatt {campaignPrice * product.Amount:F2} kr");
                         priceReset = product.Price;
                         product.Price = campaignPrice;
                     }
@@ -59,12 +59,12 @@ namespace Kassasystem
                 {
                     if (product.SellType == SellingType.ByKilo)
                     {
-                        Console.WriteLine($"{product.ProductName} {product.Amount} kg {product.Price * product.Amount} kr");
+                        Console.WriteLine($"{product.ProductName} {product.Amount} kg {product.Price * product.Amount:F2} kr");
                         priceReset = product.Price;
                     }
                     else if (product.SellType == SellingType.ByItem)
                     {
-                        Console.WriteLine($"{product.ProductName} {product.Amount} st {product.Price * product.Amount} kr");
+                        Console.WriteLine($"{product.ProductName} {product.Amount} st {product.Price * product.Amount:F2} kr");
                         priceReset = product.Price;
                     }
                 }
@@ -76,7 +76,7 @@ namespace Kassasystem
                 Total = Total + (product.Price * product.Amount);
                 product.Price = priceReset;
             }
-            Console.WriteLine($"TOTAL {Total}");
+            Console.WriteLine($"TOTAL {Total:F2}");
             
 
         }
