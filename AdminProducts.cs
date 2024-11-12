@@ -11,7 +11,7 @@ namespace Kassasystem
 {
     public class AdminProducts
     {
-        ProductList productList = new ProductList(ReadProductListFromFile("../../../ListOfProducts.txt"));
+        ProductListClass productList = new ProductListClass(ReadProductListFromFile("../../../ListOfProducts.txt"));
 
         public void AdminAddNewProduct()
         {
@@ -49,7 +49,7 @@ namespace Kassasystem
             productList.PrintProductList();
 
             int productIdInput = InputValidator.GetValidProductID
-                ("Ange produktId på produkten du vill ändra:");
+                ("Ange produktId på produkten du vill ändra:", ReadProductListFromFile("../../../ListOfProducts.txt"));
 
             Console.Clear();
             productList.FindProductToPrint(productIdInput);
@@ -90,7 +90,7 @@ namespace Kassasystem
             productList.PrintProductList();
 
             int productIdInput = InputValidator.GetValidProductID
-                ("Ange produktId på produkten du vill ta bort:");
+                ("Ange produktId på produkten du vill ta bort:", ReadProductListFromFile("../../../ListOfProducts.txt"));
 
             Console.Clear();
             productList.FindProductToPrint(productIdInput);

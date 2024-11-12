@@ -47,6 +47,12 @@ namespace Kassasystem
                 string input = Console.ReadLine();
                 if (float.TryParse(input, out result))
                 {
+                    if (result < 0)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Ogiltig inmatning. Ange en siffra över 0.");
+                        continue;
+                    }
                     return result;
                 }
                 Console.Clear();
@@ -54,35 +60,77 @@ namespace Kassasystem
             }
         }
 
-        public static DateTime GetValidDate(string prompt) 
-        { 
-            while(true)
+        public static DateTime GetValidDate(string prompt)
+        {
+            while (true)
             {
                 Console.WriteLine(prompt);
                 string input = Console.ReadLine();
                 if (DateTime.TryParse(input, out DateTime result))
                 {
-                    return result;
+                    if (result < DateTime.Today)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Ogiltig inmatning. Kan ej ange tidigare än dagens datum.");
+                        continue;
+                    }
+                    else
+                    {
+                        return result;
+                    }
                 }
                 Console.Clear();
-                Console.WriteLine("Ogiltig inmatning. Ange datum yyyy-MM-dd");
+                Console.WriteLine("Ogiltig inmatning. Ange datum yyyy-MM-dd. Kan ej ange tidigare än dagens datum.");
             }
+
         }
 
-        public static int GetValidProductID(string prompt)
+        public static int GetValidProductID(string prompt, List<Product> productList)
         {
-            int result;
-            while (true)
+            int result = 0;
+            bool doesProductExist = false;
+            while (doesProductExist == false)
             {
                 Console.WriteLine(prompt);
                 string input = Console.ReadLine();
 
                 if (input.Length == 3 && int.TryParse(input, out result))
                 {
-                    return result;
+                    foreach (Product product in productList)
+                        if (result == product.ProductId)
+                        {
+                            doesProductExist = true;
+                        }
+                        else
+                        {
+                            doesProductExist = false;
+                        }
+
                 }
-                Console.WriteLine("Ogiltig inmatning, korrekt produktId har tre siffror.");
+                Console.WriteLine("Ogiltig inmatning, korrekt produktId har tre siffror och måste finnas med i produktlistan.");
             }
+            return result;
+        }
+
+        public static bool CheckIfProductExists(int idCheck, List<Product> productList)
+        {
+            bool doesItExist = false;
+            foreach (Product product in productList) 
+            {
+                if (idCheck == product.ProductId) 
+                { 
+                    doesItExist = true;
+                }
+            }
+            if (doesItExist == false)
+            {
+                return false;
+            }
+            else 
+            { 
+                return true; 
+            }
+            
         }
 
         public static string GetValidItemForPurchase(string prompt)
@@ -102,16 +150,18 @@ namespace Kassasystem
 
                     if (parts.Length == 2 && parts[0].Length == 3
                         && int.TryParse(parts[0], out _) // _ discard operator, I only need to check this value, not save it
-                        && float.TryParse(parts[1], out _))
+                        && float.TryParse(parts[1], out _)
+                        && float.Parse(parts[1]) > 0)
                     {
                         return input;
                     }
                     Console.WriteLine("Ogiltig inmatning, ange tresiffrig produktId " +
-                        "mellanslag och antal/vikt i kilo." +
-                        "\nTex [123 3], eller [123 0,5], eller [Betala].");
+                        "mellanslag och antal/vikt i kilo, över 0." +
+                        "\nTex [123 3], eller [123 0,5], eller [Pay].");
                 }
             }
         }
+
 
         public static string GetValidInputForEditProduct(string prompt)
         {
@@ -126,13 +176,14 @@ namespace Kassasystem
 
                     if (parts.Length == 3
                     && float.TryParse(parts[1], out _)
+                    && float.Parse(parts[1]) > 0
                     && parts[2] == "kilo" || parts[2] == "styck")
                     {
                         return input;
                     }
                 }
                 Console.WriteLine("Ogiltig inmatning, ange namn " +
-                    "mellanslag pris mellanslag och kilo eller styck." +
+                    "mellanslag pris (över 0) mellanslag och kilo eller styck." +
                     "\nTex [produktnamn 12,3 kilo], eller [produktnamn 12,3 styck].");
 
             }

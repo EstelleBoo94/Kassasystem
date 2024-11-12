@@ -9,17 +9,9 @@ namespace Kassasystem
 {
     public class StartMenu
     {
-        //private Receipt _receipt;
-        //private Pay _pay;
-        //public StartMenu(/*Receipt receipt,*/ Pay pay)
-        //{
-        //    //_receipt = receipt;
-        //    _pay = pay;
-        //}
-
         public void ShowMenu()
         {
-            ProductList productList = new ProductList(ReadProductListFromFile("../../../ListOfProducts.txt"));
+            ProductListClass productList = new ProductListClass(ReadProductListFromFile("../../../ListOfProducts.txt"));
             productList.InitiateProductList();
 
             List<string> menuOptions = new List<string>
@@ -100,6 +92,7 @@ namespace Kassasystem
 
             Console.WriteLine("Kassan stängs ner... Tryck valfri tangent för att avsluta helt.");
             Console.ReadKey();
+            Environment.Exit(0);
 
         }
 

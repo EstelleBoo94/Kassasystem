@@ -13,6 +13,8 @@ namespace Kassasystem
 
         public void PrintReceiptList()
         {
+            float priceReset = 0;
+            
             Console.WriteLine($"\n**KVITTO**\nSäljare: {SellerId}\n");
 
             foreach (Product product in ReceiptListClass.GetReceiptList())
@@ -20,6 +22,7 @@ namespace Kassasystem
                 float totalDiscountPercent = 0;
                 List<Campaign> activeCampaign = CampaignList.GetActiveCampaignList();
                 bool isActive = CampaignList.IsCampaignActive();
+                
 
                 if (isActive == true)
                 {
@@ -40,11 +43,15 @@ namespace Kassasystem
                     {
                         Console.WriteLine($"KAMPANJVARA {product.ProductName} {product.Amount} kg " +
                             $"OriginalPris {product.Price * product.Amount} kr Pris med rabatt {campaignPrice * product.Amount} kr");
+                        priceReset = product.Price;
+                        product.Price = campaignPrice;
                     }
                     else if (product.SellType == SellingType.ByItem)
                     {
                         Console.WriteLine($"KAMPANJVARA {product.ProductName} {product.Amount} st " +
                             $"OriginalPris {product.Price * product.Amount} kr Pris med rabatt {campaignPrice * product.Amount} kr");
+                        priceReset = product.Price;
+                        product.Price = campaignPrice;
                     }
                 }
 
@@ -53,10 +60,12 @@ namespace Kassasystem
                     if (product.SellType == SellingType.ByKilo)
                     {
                         Console.WriteLine($"{product.ProductName} {product.Amount} kg {product.Price * product.Amount} kr");
+                        priceReset = product.Price;
                     }
                     else if (product.SellType == SellingType.ByItem)
                     {
                         Console.WriteLine($"{product.ProductName} {product.Amount} st {product.Price * product.Amount} kr");
+                        priceReset = product.Price;
                     }
                 }
             }
@@ -65,8 +74,10 @@ namespace Kassasystem
             foreach (Product product in ReceiptListClass.GetReceiptList())
             {
                 Total = Total + (product.Price * product.Amount);
+                product.Price = priceReset;
             }
             Console.WriteLine($"TOTAL {Total}");
+            
 
         }
 

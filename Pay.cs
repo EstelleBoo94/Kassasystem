@@ -8,23 +8,10 @@ namespace Kassasystem
 {
     public class Pay
     {
-        //public float Total { get; set; }
-
-        //private Receipt _receipt;
-        //public Pay(Receipt receipt)
-        //{
-        //    _receipt = receipt;
-        //}
-
-        //public Pay(float total)
-        //{
-        //    Total = total;
-        //}
-
         public void PayCard()
         {
             Console.WriteLine("\nBetalningen genomfördes.\n");
-            WriteReceiptToTxt.WriteReceiptToFile(ReceiptListClass.GetReceiptList(), Receipt.Total);
+            WriteReceiptToTxt.WriteReceiptToFile(ReceiptListClass.GetReceiptList());
             ReceiptListClass.ClearReceiptList();
         }
 
@@ -50,7 +37,7 @@ namespace Kassasystem
                 $" femhundringar\n{Hundred} hundralappar\n{Fifty} femtiolappar" +
                 $"\n{Twenty} tjugolappar\n{Ten} tiokronor\n{one} enkronor.");
 
-            WriteReceiptToTxt.WriteReceiptToFile(ReceiptListClass.GetReceiptList(), Receipt.Total);
+            WriteReceiptToTxt.WriteReceiptToFile(ReceiptListClass.GetReceiptList());
             ReceiptListClass.ClearReceiptList();
 
         }

@@ -10,7 +10,7 @@ namespace Kassasystem
 
     public class AdminMenu
     {
-        ProductList productList = new ProductList(ReadProductListFromFile("../../../ListOfProducts.txt"));
+        ProductListClass productList = new ProductListClass(ReadProductListFromFile("../../../ListOfProducts.txt"));
 
         public void ShowAdminMenu()
         {

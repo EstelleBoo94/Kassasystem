@@ -26,24 +26,7 @@ namespace Kassasystem
             return readProductList;
         }
 
-        //public static List<Campaign> ReadCampaignListFromFile(string filePath)
-        //{
-        //    List<Campaign> readCampaignList = new List<Campaign>();
-        //    using (StreamReader reader = new StreamReader(filePath))
-        //    {
-        //        string line;
-        //        while ((line = reader.ReadLine()) != null)
-        //        {
-        //            if (!string.IsNullOrWhiteSpace(line))
-        //            {
-        //                readCampaignList.Add(CampaignList.FromString(line));
-        //            }
-        //        }
-        //    }
-
-        //    return readCampaignList;
-        //}
-
+        
         public static int GetReceiptNumber()
         {
             int receiptNumber = 1;

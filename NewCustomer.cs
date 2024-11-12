@@ -11,7 +11,7 @@ namespace Kassasystem
 
     public class NewCustomer
     {
-        ProductList productList = new ProductList
+        ProductListClass productList = new ProductListClass
             (ReadProductListFromFile("../../../ListOfProducts.txt"));
 
         public void StartPurchase()
@@ -27,9 +27,9 @@ namespace Kassasystem
 
             Receipt.SellerId = sellerID;
 
-
+            bool productExist = false;
             bool payValid = false;
-            while (payValid == false)
+            while (payValid == false && productExist == false)
             {
                 Console.Clear();
 
@@ -38,9 +38,11 @@ namespace Kassasystem
                 receipt.PrintReceiptList();
 
                 string input = InputValidator.GetValidItemForPurchase
-                    ("\nAnge produkt-ID och antal (vikt i kilo om kilopris) med mellanslag emellan:" +
-                    "\n*Ange Pay för att slutföra köpet*\n");
+                        ("\nAnge produkt-ID och antal (vikt i kilo om kilopris) med mellanslag emellan:" +
+                        "\n*Ange Pay för att slutföra köpet*\n");
+                
 
+                
                 PayMenu payMenu = new PayMenu();
 
                 if (input.ToLower() == "pay")
@@ -53,8 +55,17 @@ namespace Kassasystem
                 string[] whatProduct = input.Split(" ");
                 int findID = Convert.ToInt32(whatProduct[0]);
                 float amount = Convert.ToSingle(whatProduct[1]);
-
-                productList.FindProductToReceipt(findID, amount, receipt);
+                bool productInExistance = InputValidator.CheckIfProductExists(findID, ReadProductListFromFile("../../../ListOfProducts.txt"));
+                if (productInExistance == false)
+                {
+                    Console.WriteLine("Ange produktId från listan. Tryck valfri tangent för att fortsätta.");
+                    Console.ReadKey();
+                    continue;
+                }
+                else
+                {
+                    productList.FindProductToReceipt(findID, amount, receipt);
+                }
 
             }
 

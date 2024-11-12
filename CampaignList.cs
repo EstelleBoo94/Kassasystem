@@ -12,73 +12,29 @@ namespace Kassasystem
     {
         public static List<Campaign> CampaignListProp { get; set; } = new List<Campaign>();
 
-        //public CampaignList(List<Campaign> campaignList)
-        //{
-        //    CampaignListProp = campaignList;
-        //}
-
+        
         public void AddNewCampaign(Campaign newCampaign)
         {
             CampaignListProp.Add(newCampaign);
         }
 
-        //public void WriteCampaignListToFile(string filePath)
-        //{
-
-        //    if (!File.Exists(filePath))
-        //    {
-        //        using (StreamWriter writer = new StreamWriter(filePath))
-        //        {
-        //            writer.WriteLine("**LISTA ÖVER KAMPANJER**");
-        //        }
-        //    }
-
-        //    using (StreamWriter writer = new StreamWriter(filePath))
-        //    {
-        //        foreach (Campaign campaign in CampaignListProp)
-        //        {
-        //            writer.Write(value: campaign.CampaignName.ToString());
-        //            writer.Write("-");
-        //            writer.Write(value: campaign.CampaignStartDate.ToString());
-        //            writer.Write("-");
-        //            writer.Write(value: campaign.CampaignEndDate.ToString());
-        //            writer.Write("-");
-        //            writer.Write(value: campaign.CampaignDiscountPercent.ToString());
-        //            writer.Write("-");
-        //            writer.WriteLine("Produkter som ingår i kampanjen;");
-        //            foreach (Product product in campaign.ProductsInCampaign)
-        //            {
-        //                writer.WriteLine(product.ToString());
-        //            }
-        //            writer.WriteLine("##########################\n");
-        //        }
-        //    }
-        //}
-
-        //public static Campaign FromString(string reading)
-        //{
-        //    string[] parts = reading.Split("-");
-        //    string[] prodParts = reading.Split(":");
-
-        //    return new Campaign
-        //            (
-        //            parts[0],
-        //            DateTime.Parse(parts[1]),
-        //            DateTime.Parse(parts[2]),
-        //            Convert.ToSingle(parts[3])
-        //            );
-        //}
 
         public void PrintCampaignList()
         {
-            //CampaignListProp = ReadCampaignListFromFile("../../../ListOfCampaigns.txt");
-            foreach (Campaign campaign in CampaignListProp)
+            if (CampaignListProp.Count <= 0)
             {
-                Console.WriteLine($"{campaign.CampaignName} {campaign.CampaignStartDate} - {campaign.CampaignEndDate} {campaign.CampaignDiscountPercent}% rea.");
-                Console.WriteLine("Produkter som ingår i kampanjen:");
-                foreach (Product product in campaign.ProductsInCampaign)
+                Console.WriteLine("Inga pågående kampanjer.");
+            }
+            else
+            {
+                foreach (Campaign campaign in CampaignListProp)
                 {
-                    Console.WriteLine(product);
+                    Console.WriteLine($"{campaign.CampaignName} {campaign.CampaignStartDate} - {campaign.CampaignEndDate} {campaign.CampaignDiscountPercent}% rabatt.");
+                    Console.WriteLine("Produkter som ingår i kampanjen:");
+                    foreach (Product product in campaign.ProductsInCampaign)
+                    {
+                        Console.WriteLine(product);
+                    }
                 }
             }
         }
@@ -89,7 +45,7 @@ namespace Kassasystem
             {
                 if (findName == campaign.CampaignName)
                 {
-                    Console.WriteLine($"{campaign.CampaignName} {campaign.CampaignStartDate} - {campaign.CampaignEndDate} {campaign.CampaignDiscountPercent}% rea.");
+                    Console.WriteLine($"{campaign.CampaignName} {campaign.CampaignStartDate} - {campaign.CampaignEndDate} {campaign.CampaignDiscountPercent}% rabatt.");
                     Console.WriteLine("Produkter som ingår i kampanjen:");
                     foreach (Product product in prodToCampaign)
                     {

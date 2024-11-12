@@ -8,11 +8,11 @@ using static Kassasystem.ReadingFromFile;
 
 namespace Kassasystem
 {
-    public class ProductList
+    public class ProductListClass
     {
         public List<Product> ProductListProp { get; set; }
 
-        public ProductList(List<Product> productList)
+        public ProductListClass(List<Product> productList)
         {
             ProductListProp = productList;
         }
@@ -153,7 +153,7 @@ namespace Kassasystem
             bool addMore = true;
             while (addMore == true)
             {
-                int findProductId = InputValidator.GetValidProductID("Ange produktId på produkten som ska ingå i kampanjen:");
+                int findProductId = InputValidator.GetValidProductID("Ange produktId på produkten som ska ingå i kampanjen:", ProductListProp);
                 foreach (Product product in ProductListProp)
                 {
                     if (product.ProductId == findProductId)
