@@ -13,7 +13,8 @@ namespace Kassasystem.ReadingAndWritingFolder
     public class WriteReceiptToTxt
     {
 
-        public static void WriteReceiptToFile(List<Product> receiptList, bool wasPaymentMethodCash, int payment, int moneyBack)
+        public static void WriteReceiptToFile(List<Product> receiptList, 
+            bool wasPaymentMethodCash, int payment, int moneyBack)
         {
             int receiptNumber = GetReceiptNumber();
             string filePath = $"../../../ReceiptFolder/receipt_{DateTime.Now:yyyy-MM-dd}.txt";
@@ -73,24 +74,32 @@ namespace Kassasystem.ReadingAndWritingFolder
                         {
                             if (product.SellType == SellingType.ByKilo)
                             {
-                                writer.WriteLine($"KAMPANJVARA {product.ProductName.ToString()} {product.Amount.ToString()} kg " +
-                                    $"OriginalPris {priceTotal.ToString("F2")} kr\n  Pris med {totalDiscountPercent}% rabatt {campaignPriceTotal.ToString("F2")} kr");
+                                writer.WriteLine($"KAMPANJVARA {product.ProductName.ToString()} " +
+                                    $"{product.Amount.ToString()} kg " +
+                                    $"OriginalPris {priceTotal.ToString("F2")} kr\n  " +
+                                    $"Pris med {totalDiscountPercent}% rabatt " +
+                                    $"{campaignPriceTotal.ToString("F2")} kr");
                             }
                             else if (product.SellType == SellingType.ByItem)
                             {
-                                writer.WriteLine($"KAMPANJVARA {product.ProductName.ToString()} {product.Amount.ToString()} st " +
-                                    $"OriginalPris {priceTotal.ToString("F2")} kr\n  Pris med {totalDiscountPercent}% rabatt {campaignPriceTotal.ToString("F2")} kr");
+                                writer.WriteLine($"KAMPANJVARA {product.ProductName.ToString()} " +
+                                    $"{product.Amount.ToString()} st " +
+                                    $"OriginalPris {priceTotal.ToString("F2")} kr\n  " +
+                                    $"Pris med {totalDiscountPercent}% rabatt " +
+                                    $"{campaignPriceTotal.ToString("F2")} kr");
                             }
                         }
                         else
                         {
                             if (product.SellType == SellingType.ByKilo)
                             {
-                                writer.WriteLine($"{product.ProductName.ToString()} {product.Amount.ToString()} kg {priceTotal.ToString("F2")} kr");
+                                writer.WriteLine($"{product.ProductName.ToString()} " +
+                                    $"{product.Amount.ToString()} kg {priceTotal.ToString("F2")} kr");
                             }
                             else if (product.SellType == SellingType.ByItem)
                             {
-                                writer.WriteLine($"{product.ProductName.ToString()} {product.Amount.ToString()} st {priceTotal.ToString("F2")} kr");
+                                writer.WriteLine($"{product.ProductName.ToString()} " +
+                                    $"{product.Amount.ToString()} st {priceTotal.ToString("F2")} kr");
                             }
                         }
 
@@ -102,11 +111,13 @@ namespace Kassasystem.ReadingAndWritingFolder
                         decimal priceTotal = product.Price * product.Amount;
                         if (product.SellType == SellingType.ByKilo)
                         {
-                            writer.WriteLine($"{product.ProductName.ToString()} {product.Amount.ToString()} kg {priceTotal.ToString("F2")} kr");
+                            writer.WriteLine($"{product.ProductName.ToString()} " +
+                                $"{product.Amount.ToString()} kg {priceTotal.ToString("F2")} kr");
                         }
                         else if (product.SellType == SellingType.ByItem)
                         {
-                            writer.WriteLine($"{product.ProductName.ToString()} {product.Amount.ToString()} st {priceTotal.ToString("F2")} kr");
+                            writer.WriteLine($"{product.ProductName.ToString()} " +
+                                $"{product.Amount.ToString()} st {priceTotal.ToString("F2")} kr");
                         }
                     }
                 }

@@ -33,7 +33,9 @@ namespace Kassasystem.Resources
         {
             while (true)
             {
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine(prompt);
+                Console.ResetColor();
                 string input = Console.ReadLine();
                 if (input.ToLower() == "ja" || input.ToLower() == "nej")
                 {
@@ -51,7 +53,9 @@ namespace Kassasystem.Resources
             short result;
             while (true)
             {
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine(prompt);
+                Console.ResetColor();
                 string input = Console.ReadLine();
                 if (short.TryParse(input, out result))
                 {
@@ -77,7 +81,9 @@ namespace Kassasystem.Resources
             decimal result;
             while (true)
             {
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine(prompt);
+                Console.ResetColor();
                 string input = Console.ReadLine();
                 if (decimal.TryParse(input, out result))
                 {
@@ -103,7 +109,9 @@ namespace Kassasystem.Resources
             int result;
             while (true)
             {
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine(prompt);
+                Console.ResetColor();
                 string input = Console.ReadLine();
                 if (int.TryParse(input, out result))
                 {
@@ -128,7 +136,9 @@ namespace Kassasystem.Resources
         {
             while (true)
             {
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine(prompt);
+                Console.ResetColor();
                 string input = Console.ReadLine();
                 if (DateTime.TryParse(input, out DateTime result))
                 {
@@ -147,7 +157,8 @@ namespace Kassasystem.Resources
                 }
                 Console.Clear();
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Ogiltig inmatning. Ange datum yyyy-MM-dd. Kan ej ange tidigare än dagens datum.");
+                Console.WriteLine("Ogiltig inmatning. Ange datum yyyy-MM-dd. " +
+                    "Kan ej ange tidigare än dagens datum.");
                 Console.ResetColor();
             }
 
@@ -159,7 +170,9 @@ namespace Kassasystem.Resources
             bool doesProductExist = false;
             while (doesProductExist == false)
             {
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine(prompt);
+                Console.ResetColor();
                 string input = Console.ReadLine();
 
                 if (input.Length == 3 && int.TryParse(input, out result))
@@ -260,7 +273,9 @@ namespace Kassasystem.Resources
         {
             while (true)
             {
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine(prompt);
+                Console.ResetColor();
                 string input = Console.ReadLine();
 
                 if (!string.IsNullOrWhiteSpace(input))

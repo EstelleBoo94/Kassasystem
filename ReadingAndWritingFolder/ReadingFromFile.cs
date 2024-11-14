@@ -12,6 +12,13 @@ namespace Kassasystem.ReadingAndWritingFolder
         public static List<Product> ReadProductListFromFile(string filePath)
         {
             List<Product> readProductList = new List<Product>();
+            if (!File.Exists(filePath))
+            {
+                using (StreamWriter writer = new StreamWriter(filePath))
+                {
+                }
+            }
+
             using (StreamReader reader = new StreamReader(filePath))
             {
                 string line;

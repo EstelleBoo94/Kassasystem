@@ -14,7 +14,8 @@ namespace Kassasystem.MenusFolder
     {
         public void ShowMenu()
         {
-            ProductListClass productList = new ProductListClass(ReadProductListFromFile("../../../ListOfProducts.txt"));
+            ProductListClass productList = new ProductListClass
+                (ReadProductListFromFile("../../../ListOfProducts.txt"));
             productList.InitiateProductList();
 
             List<string> menuOptions = new List<string>
@@ -95,7 +96,9 @@ namespace Kassasystem.MenusFolder
 
 
             }
+            Console.ForegroundColor= ConsoleColor.Yellow;
             Console.WriteLine("Kassan stängs ner... Tryck valfri tangent för att avsluta helt.");
+            Console.ResetColor();
             Console.ReadKey();
             Environment.Exit(0);
 

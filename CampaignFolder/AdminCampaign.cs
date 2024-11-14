@@ -13,7 +13,8 @@ namespace Kassasystem.CampaignFolder
     public class AdminCampaign
     {
         CampaignList campaignList = new CampaignList();
-        ProductListClass productList = new ProductListClass(ReadProductListFromFile("../../../ListOfProducts.txt"));
+        ProductListClass productList = new ProductListClass
+            (ReadProductListFromFile("../../../ListOfProducts.txt"));
         List<Product> productToCampaignList = new List<Product>();
 
         public void AdminAddNewCampaign()
@@ -21,33 +22,46 @@ namespace Kassasystem.CampaignFolder
             Console.Clear();
             Designs.PrintHeader("LÄGG TILL KAMPANJ");
 
-            string name = InputValidator.GetNonEmptyString("Ange namn på kampanjen:");
-            DateTime start = InputValidator.GetValidDate("Ange startdatum för kampanjen (yyyy-MM-dd):");
-            DateTime end = InputValidator.GetValidDate("Ange slutdatum för kampanjen (yyyy-MM-dd):");
+            string name = InputValidator.GetNonEmptyString("Ange namn på kampanjen:\n");
+            DateTime start = InputValidator.GetValidDate
+                ("\nAnge startdatum för kampanjen (yyyy-MM-dd):\n");
+            DateTime end = InputValidator.GetValidDate
+                ("\nAnge slutdatum för kampanjen (yyyy-MM-dd):\n");
             while (end <= start)
             {
                 Console.Clear();
-                Console.WriteLine("Slutdatum måste vara minst en dag efter startdatum. Ange start- och slutdatum igen.");
+                Console.WriteLine("\nSlutdatum måste vara minst en dag efter startdatum. " +
+                    "Ange start- och slutdatum igen.\n");
                 Console.ReadKey();
-                start = InputValidator.GetValidDate("Ange startdatum för kampanjen (yyyy-MM-dd):");
-                end = InputValidator.GetValidDate("Ange slutdatum för kampanjen (yyyy-MM-dd):");
+                start = InputValidator.GetValidDate("\nAnge startdatum för kampanjen (yyyy-MM-dd):\n");
+                end = InputValidator.GetValidDate("\nAnge slutdatum för kampanjen (yyyy-MM-dd):\n");
             }
-            short discount = InputValidator.GetValidShort("Ange den procentuella rabatten (ange endast siffror):");
+            short discount = InputValidator.GetValidShort
+                ("\nAnge den procentuella rabatten (ange endast siffror):\n");
             while (discount >= 100)
             {
                 Console.Clear();
-                Console.WriteLine("Rabatten måste vara mindre än 100.");
+                Console.WriteLine("\nRabatten måste vara mindre än 100.\n");
                 Console.ReadKey();
-                discount = InputValidator.GetValidShort("Ange den procentuella rabatten (ange endast siffror):");
+                discount = InputValidator.GetValidShort
+                    ("\nAnge den procentuella rabatten (ange endast siffror):\n");
             }
+
+            Console.Clear();
+            Designs.PrintHeader("LÄGG TILL KAMPANJ");
 
             productList.PrintProductList();
             productToCampaignList = productList.ProductListToCampaign();
 
+            Console.Clear();
+            Designs.PrintHeader("LÄGG TILL KAMPANJ");
             Campaign campaign = new Campaign(name, start, end, discount, productToCampaignList);
             campaignList.AddNewCampaign(campaign);
-            Console.WriteLine($"Kampanjen är tillagd." +
-                $"\n Tryck valfri tangent för att fortsätta.");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"Kampanjen är tillagd.");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine($"\n Tryck valfri tangent för att fortsätta.");
+            Console.ResetColor();
             Console.ReadKey();
 
         }
@@ -57,25 +71,43 @@ namespace Kassasystem.CampaignFolder
             Console.Clear();
             Designs.PrintHeader("TA BORT KAMPANJ");
 
-            campaignList.PrintCampaignList();
+            bool emptyCampaignList = campaignList.PrintCampaignList();
 
-            string campaignNameInput = InputValidator.GetNonEmptyString
-                ("Ange namnet på kampanjen du vill ta bort:");
-
-            Console.Clear();
-            campaignList.FindCampaignToPrint(campaignNameInput, productToCampaignList);
-
-            string deleteThis = InputValidator.GetValidYesOrNo("Vill du ta bort den här kampanjen helt? Ja/Nej");
-            if (deleteThis.ToLower() == "ja")
+            while (emptyCampaignList == false)
             {
-                campaignList.RemoveCampaign(campaignNameInput);
-                Console.WriteLine($"Kampanjen är borttagen." +
-                    $"\n Tryck valfri tangent för att fortsätta.");
-                Console.ReadKey();
+                string campaignNameInput = InputValidator.GetNonEmptyString
+                    ("Ange namnet på kampanjen du vill ta bort:\n");
+
+                Console.Clear();
+                Designs.PrintHeader("TA BORT KAMPANJ");
+                campaignList.FindCampaignToPrint(campaignNameInput, productToCampaignList);
+
+                string deleteThis = InputValidator.GetValidYesOrNo
+                    ("\nVill du ta bort den här kampanjen helt? Ja/Nej\n");
+                if (deleteThis.ToLower() == "ja")
+                {
+                    campaignList.RemoveCampaign(campaignNameInput);
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine($"Kampanjen är borttagen.");
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine($"\nTryck valfri tangent för att fortsätta.");
+                    Console.ResetColor();
+                    Console.ReadKey();
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine("\nTryck valfri tangent för att återgå till menyn.");
+                    Console.ResetColor();
+                    Console.ReadKey();
+                }
+                break;
             }
-            else
+            if (emptyCampaignList == true)
             {
-                Console.WriteLine("Tryck valfri tangent för att återgå till menyn.");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("\nTryck valfri tangent för att återgå till menyn.");
+                Console.ResetColor();
                 Console.ReadKey();
             }
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading.Channels;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Kassasystem.Resources;
@@ -12,33 +13,47 @@ namespace Kassasystem.ProductFolder
 {
     public class AdminProducts
     {
-        ProductListClass productList = new ProductListClass(ReadProductListFromFile("../../../ListOfProducts.txt"));
+        ProductListClass productList = new ProductListClass
+            (ReadProductListFromFile("../../../ListOfProducts.txt"));
 
         public void AdminAddNewProduct()
         {
             Console.Clear();
             Designs.PrintHeader("LÄGG TILL PRODUKT");
 
-            string name = InputValidator.GetNonEmptyString("Ange namn på produkten:");
-            decimal price = InputValidator.GetValidDecimal("Ange pris på produkten:");
-            string sellingTypeInput = InputValidator.GetValidYesOrNo("Har produkten kilopris? Ja/Nej");
+            string name = InputValidator.GetNonEmptyString("Ange namn på produkten:\n");
+            decimal price = InputValidator.GetValidDecimal("\nAnge pris på produkten:\n");
+            string sellingTypeInput = InputValidator.GetValidYesOrNo
+                ("\nHar produkten kilopris? Ja/Nej\n");
             int productID = productList.GetNextProductID();
             if (sellingTypeInput.ToLower() == "ja")
             {
+                Console.Clear();
+                Designs.PrintHeader("LÄGG TILL PRODUKT");
                 Product product = new Product(productID, name, price, SellingType.ByKilo);
                 productList.AddNewProduct(product);
                 productList.WriteProductListToFile("../../../ListOfProducts.txt");
-                Console.WriteLine($"Produkt {product.ProductName} som kostar {product.Price:F2} kr per kilo har lagts till med produktID {product.ProductId}." +
-                    $"\n Tryck valfri tangent för att fortsätta.");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"\nProdukt {product.ProductName} som kostar {product.Price:F2}" +
+                    $" kr per kilo har lagts till med produktID {product.ProductId}.");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine($"\n Tryck valfri tangent för att fortsätta.");
+                Console.ResetColor();
                 Console.ReadKey();
             }
             else if (sellingTypeInput.ToLower() == "nej")
             {
+                Console.Clear();
+                Designs.PrintHeader("LÄGG TILL PRODUKT");
                 Product product = new Product(productID, name, price, SellingType.ByItem);
                 productList.AddNewProduct(product);
                 productList.WriteProductListToFile("../../../ListOfProducts.txt");
-                Console.WriteLine($"Produkt {product.ProductName} som kostar {product.Price:F2} kr styck har lagts till med produktID {product.ProductId}." +
-                    $"\n Tryck valfri tangent för att fortsätta.");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"\nProdukt {product.ProductName} som kostar {product.Price:F2}" +
+                    $" kr styck har lagts till med produktID {product.ProductId}.");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine($"\n Tryck valfri tangent för att fortsätta.");
+                Console.ResetColor();
                 Console.ReadKey();
             }
 
@@ -52,9 +67,11 @@ namespace Kassasystem.ProductFolder
             productList.PrintProductList();
 
             int productIdInput = InputValidator.GetValidProductID
-                ("Ange produktId på produkten du vill ändra:", ReadProductListFromFile("../../../ListOfProducts.txt"));
+                ("Ange produktId på produkten du vill ändra:", 
+                ReadProductListFromFile("../../../ListOfProducts.txt"));
 
             Console.Clear();
+            Designs.PrintHeader("ÄNDRA PRODUKT");
             productList.FindProductToPrint(productIdInput);
 
             string update = InputValidator.GetValidInputForEditProduct
@@ -67,20 +84,30 @@ namespace Kassasystem.ProductFolder
 
             if (newType.ToLower() == "kilo")
             {
+                Console.Clear();
+                Designs.PrintHeader("ÄNDRA PRODUKT");
                 Product product = new Product(productIdInput, newName, newPrice, SellingType.ByKilo);
                 productList.ReplaceProduct(productIdInput, product);
                 productList.WriteProductListToFile("../../../ListOfProducts.txt");
-                Console.WriteLine($"Produkten är uppdaterad." +
-                    $"\n Tryck valfri tangent för att fortsätta.");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"\nProdukten är uppdaterad.");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine($"\n Tryck valfri tangent för att fortsätta.");
+                Console.ResetColor();
                 Console.ReadKey();
             }
             else if (newType.ToLower() == "styck")
             {
+                Console.Clear();
+                Designs.PrintHeader("ÄNDRA PRODUKT");
                 Product product = new Product(productIdInput, newName, newPrice, SellingType.ByItem);
                 productList.ReplaceProduct(productIdInput, product);
                 productList.WriteProductListToFile("../../../ListOfProducts.txt");
-                Console.WriteLine($"Produkten är uppdaterad." +
-                    $"\n Tryck valfri tangent för att fortsätta.");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"\nProdukten är uppdaterad.");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine($"\n Tryck valfri tangent för att fortsätta.");
+                Console.ResetColor();
                 Console.ReadKey();
             }
 
@@ -94,23 +121,33 @@ namespace Kassasystem.ProductFolder
             productList.PrintProductList();
 
             int productIdInput = InputValidator.GetValidProductID
-                ("Ange produktId på produkten du vill ta bort:", ReadProductListFromFile("../../../ListOfProducts.txt"));
+                ("Ange produktId på produkten du vill ta bort:", 
+                ReadProductListFromFile("../../../ListOfProducts.txt"));
 
             Console.Clear();
+            Designs.PrintHeader("TA BORT PRODUKT");
             productList.FindProductToPrint(productIdInput);
 
-            string deleteThis = InputValidator.GetValidYesOrNo("Vill du ta bort den här produkten helt? Ja/Nej");
+            string deleteThis = InputValidator.GetValidYesOrNo
+                ("\nVill du ta bort den här produkten helt? Ja/Nej\n");
             if (deleteThis.ToLower() == "ja")
             {
+                Console.Clear();
+                Designs.PrintHeader("TA BORT PRODUKT");
                 productList.RemoveProduct(productIdInput);
                 productList.WriteProductListToFile("../../../ListOfProducts.txt");
-                Console.WriteLine($"Produkten är borttagen." +
-                    $"\n Tryck valfri tangent för att fortsätta.");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"\nProdukten är borttagen.");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine($"\n Tryck valfri tangent för att fortsätta.");
+                Console.ResetColor();
                 Console.ReadKey();
             }
             else
             {
-                Console.WriteLine("Tryck valfri tangent för att återgå till menyn.");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("\nTryck valfri tangent för att återgå till menyn.");
+                Console.ResetColor();
                 Console.ReadKey();
             }
         }

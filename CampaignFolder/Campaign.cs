@@ -15,7 +15,8 @@ namespace Kassasystem.CampaignFolder
         public short CampaignDiscountPercent { get; set; }
         public List<Product> ProductsInCampaign { get; set; }
 
-        public Campaign(string name, DateTime start, DateTime end, short discount, List<Product> productsInCampaign)
+        public Campaign(string name, DateTime start, DateTime end, 
+            short discount, List<Product> productsInCampaign)
         {
             CampaignName = name;
             CampaignStartDate = start;

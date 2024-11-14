@@ -16,8 +16,11 @@ namespace Kassasystem.PurchasesFolder
         public void PayCard()
         {
             wasPaymentMethodCash = false;
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("\nBetalningen genomfördes.\n");
-            WriteReceiptToTxt.WriteReceiptToFile(ReceiptListClass.GetReceiptList(), wasPaymentMethodCash, payment, moneyBack);
+            Console.ResetColor();
+            WriteReceiptToTxt.WriteReceiptToFile
+                (ReceiptListClass.GetReceiptList(), wasPaymentMethodCash, payment, moneyBack);
             ReceiptListClass.ClearReceiptList();
         }
 
@@ -25,7 +28,11 @@ namespace Kassasystem.PurchasesFolder
         {
             wasPaymentMethodCash = true;
             Console.Clear();
-            payment = InputValidator.GetValidInt($"Hur mycket betalar kunden? Summa att betala: {Receipt.Total:F2}");
+            Designs.PrintHeader("BETALNING");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            payment = InputValidator.GetValidInt($"Hur mycket betalar kunden?\n" +
+                $"Summa att betala: {Receipt.Total:F2} kr");
+            Console.ResetColor();
 
             int roundedTotal = (int)Math.Round(Receipt.Total);
             moneyBack = payment - roundedTotal;
@@ -41,11 +48,14 @@ namespace Kassasystem.PurchasesFolder
             int Ten = RestTwenty / 10;
             int RestTen = RestTwenty % 10;
             int one = RestTen / 1;
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"Kunden ska få tillbaka: {moneyBack} kr \n{Fivehundred}" +
                 $" x femhundrasedlar\n{Hundred} x etthundrasedlar\n{Fifty} x femtiosedlar" +
                 $"\n{Twenty} x tjugosedlar\n{Ten} x tiokronor\n{one} x enkronor.");
+            Console.ResetColor();
 
-            WriteReceiptToTxt.WriteReceiptToFile(ReceiptListClass.GetReceiptList(), wasPaymentMethodCash, payment, moneyBack);
+            WriteReceiptToTxt.WriteReceiptToFile
+                (ReceiptListClass.GetReceiptList(), wasPaymentMethodCash, payment, moneyBack);
             ReceiptListClass.ClearReceiptList();
 
         }

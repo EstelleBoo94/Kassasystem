@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Kassasystem.ProductFolder;
+using Kassasystem.Resources;
 using static Kassasystem.ReadingAndWritingFolder.ReadingFromFile;
 
 namespace Kassasystem.CampaignFolder
@@ -20,23 +21,30 @@ namespace Kassasystem.CampaignFolder
         }
 
 
-        public void PrintCampaignList()
+        public bool PrintCampaignList()
         {
+            bool emptyCampaignList = false;
             if (CampaignListProp.Count <= 0)
             {
                 Console.WriteLine("Inga pågående kampanjer.");
+                emptyCampaignList = true;
+                return emptyCampaignList;
             }
             else
             {
                 foreach (Campaign campaign in CampaignListProp)
                 {
-                    Console.WriteLine($"{campaign.CampaignName} {campaign.CampaignStartDate} - {campaign.CampaignEndDate} {campaign.CampaignDiscountPercent}% rabatt.");
-                    Console.WriteLine("Produkter som ingår i kampanjen:");
+                    Console.WriteLine($"Kampanjnamn: {campaign.CampaignName} " +
+                        $"Period {campaign.CampaignStartDate.Date} - {campaign.CampaignEndDate.Date}" +
+                        $"\n     {campaign.CampaignDiscountPercent}% rabatt.");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine(" Produkter som ingår i kampanjen:");
                     foreach (Product product in campaign.ProductsInCampaign)
                     {
-                        Console.WriteLine(product);
+                        Designs.PrintWithMargin($"{product}");
                     }
                 }
+                return emptyCampaignList;
             }
         }
 
@@ -46,11 +54,14 @@ namespace Kassasystem.CampaignFolder
             {
                 if (findName == campaign.CampaignName)
                 {
-                    Console.WriteLine($"{campaign.CampaignName} {campaign.CampaignStartDate} - {campaign.CampaignEndDate} {campaign.CampaignDiscountPercent}% rabatt.");
-                    Console.WriteLine("Produkter som ingår i kampanjen:");
+                    Console.WriteLine($"Kampanjnamn: {campaign.CampaignName} " +
+                        $"Period {campaign.CampaignStartDate.Date} - {campaign.CampaignEndDate.Date}" +
+                        $"\n     {campaign.CampaignDiscountPercent}% rabatt.");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine(" Produkter som ingår i kampanjen:");
                     foreach (Product product in campaign.ProductsInCampaign)
                     {
-                        Console.WriteLine(product);
+                        Designs.PrintWithMargin($"{product}");
                     }
                 }
 

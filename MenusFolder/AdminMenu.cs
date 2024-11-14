@@ -13,7 +13,8 @@ namespace Kassasystem.MenusFolder
 
     public class AdminMenu
     {
-        ProductListClass productList = new ProductListClass(ReadProductListFromFile("../../../ListOfProducts.txt"));
+        ProductListClass productList = new ProductListClass
+            (ReadProductListFromFile("../../../ListOfProducts.txt"));
 
         public void ShowAdminMenu()
         {
@@ -22,7 +23,9 @@ namespace Kassasystem.MenusFolder
 
             List<string> menuOptions = new List<string>
             {
-            "Lägg till ny produkt", "Ta bort produkt", "Ändra produkt", "Visa produktlista", "Lägg till ny kampanj", "Ta bort kampanj", "Visa pågående kampanjer"
+            "Lägg till ny produkt", "Ta bort produkt", "Ändra produkt", 
+                "Visa produktlista", "Lägg till ny kampanj", "Ta bort kampanj", 
+                "Visa pågående kampanjer"
             };
 
             int selection = 0;
@@ -103,7 +106,9 @@ namespace Kassasystem.MenusFolder
                         Console.Clear();
                         Designs.PrintHeader("VISA PRODUKTLISTA");
                         productList.PrintProductList();
+                        Console.ForegroundColor = ConsoleColor.Cyan;
                         Console.WriteLine("\nTryck valfri tangent för att återgå till menyn.");
+                        Console.ResetColor();
                         Console.ReadKey();
                     }
                     else if (selection == 4)
@@ -118,7 +123,9 @@ namespace Kassasystem.MenusFolder
                     {
                         Console.Clear();
                         adminCampaign.PrintCampaignListToMenu();
+                        Console.ForegroundColor = ConsoleColor.Cyan;
                         Console.WriteLine("\nTryck valfri tangent för att återgå till menyn.");
+                        Console.ResetColor();
                         Console.ReadKey();
                     }
                 }
@@ -126,8 +133,6 @@ namespace Kassasystem.MenusFolder
 
             }
 
-            Console.WriteLine("Tryck valfri tangent för att återgå till startmenyn.");
-            Console.ReadKey();
             StartMenu startMenu = new StartMenu();
             startMenu.ShowMenu();
 

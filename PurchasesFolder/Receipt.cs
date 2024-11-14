@@ -54,14 +54,16 @@ namespace Kassasystem.PurchasesFolder
                         if (product.SellType == SellingType.ByKilo)
                         {
                             Console.WriteLine($"KAMPANJVARA {product.ProductName} {product.Amount} kg " +
-                                $"OriginalPris {product.Price * product.Amount:F2} kr/kg\n   Pris med rabatt {campaignPrice * product.Amount:F2} kr");
+                                $"OriginalPris {product.Price * product.Amount:F2} kr/kg\n" +
+                                $"   Pris med rabatt {campaignPrice * product.Amount:F2} kr");
 
                             product.Price = campaignPrice;
                         }
                         else if (product.SellType == SellingType.ByItem)
                         {
                             Console.WriteLine($"KAMPANJVARA {product.ProductName} {product.Amount} st " +
-                                $"OriginalPris {product.Price * product.Amount:F2} kr\n   Pris med rabatt {campaignPrice * product.Amount:F2} kr");
+                                $"OriginalPris {product.Price * product.Amount:F2} kr\n" +
+                                $"   Pris med rabatt {campaignPrice * product.Amount:F2} kr");
 
                             product.Price = campaignPrice;
                         }
@@ -70,12 +72,14 @@ namespace Kassasystem.PurchasesFolder
                     {
                         if (product.SellType == SellingType.ByKilo)
                         {
-                            Console.WriteLine($"{product.ProductName} {product.Amount} kg {product.Price * product.Amount:F2} kr");
+                            Console.WriteLine($"{product.ProductName} {product.Amount} kg" +
+                                $" {product.Price * product.Amount:F2} kr");
 
                         }
                         else if (product.SellType == SellingType.ByItem)
                         {
-                            Console.WriteLine($"{product.ProductName} {product.Amount} st {product.Price * product.Amount:F2} kr");
+                            Console.WriteLine($"{product.ProductName} {product.Amount} st" +
+                                $" {product.Price * product.Amount:F2} kr");
 
                         }
                     }
@@ -85,26 +89,21 @@ namespace Kassasystem.PurchasesFolder
                 {
                     if (product.SellType == SellingType.ByKilo)
                     {
-                        Console.WriteLine($"{product.ProductName} {product.Amount} kg {product.Price * product.Amount:F2} kr");
+                        Console.WriteLine($"{product.ProductName} {product.Amount} kg" +
+                            $" {product.Price * product.Amount:F2} kr");
 
                     }
                     else if (product.SellType == SellingType.ByItem)
                     {
-                        Console.WriteLine($"{product.ProductName} {product.Amount} st {product.Price * product.Amount:F2} kr");
+                        Console.WriteLine($"{product.ProductName} {product.Amount} st" +
+                            $" {product.Price * product.Amount:F2} kr");
 
                     }
                 }
-                //totalPriceOfProducts.Add(product);
                 Total = Total + product.Price * product.Amount;
                 product.Price = priceReset;
             }
 
-
-            //Total = 0;
-            //foreach (Product product in totalPriceOfProducts)
-            //{
-            //    Total = Total + (product.Price * product.Amount);
-            //}
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"TOTAL {Total:F2}");
             Console.ResetColor();

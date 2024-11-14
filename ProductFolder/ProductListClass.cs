@@ -99,7 +99,7 @@ namespace Kassasystem.ProductFolder
         {
             ProductListProp = ReadProductListFromFile("../../../ListOfProducts.txt");
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Designs.PrintWithMargin("PRODUKTLISTA:\n");
+            Console.WriteLine("PRODUKTLISTA:\n");
             Console.ResetColor();
             foreach (Product product in ProductListProp)
             {
@@ -112,7 +112,10 @@ namespace Kassasystem.ProductFolder
                 {
                     type = "styckpris";
                 }
-                Designs.PrintWithMargin($"{product.ProductId}, {product.ProductName}, {product.Price}, {type}");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Designs.PrintWithMargin
+                    ($"{product.ProductId}, {product.ProductName}, {product.Price}, {type}");
+                Console.ResetColor();
             }
         }
 
@@ -144,7 +147,10 @@ namespace Kassasystem.ProductFolder
                     {
                         type = "styckpris";
                     }
-                    Console.WriteLine($"{product.ProductId}, {product.ProductName}, {product.Price}, {type}");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine
+                        ($"{product.ProductId}, {product.ProductName}, {product.Price}, {type}");
+                    Console.ResetColor();
                 }
 
             }
@@ -157,12 +163,15 @@ namespace Kassasystem.ProductFolder
             bool addMore = true;
             while (addMore == true)
             {
-                int findProductId = InputValidator.GetValidProductID("Ange produktId på produkten som ska ingå i kampanjen:", ProductListProp);
+                int findProductId = InputValidator.GetValidProductID
+                    ("\nAnge produktId på produkten som ska ingå i kampanjen:\n", ProductListProp);
                 foreach (Product product in ProductListProp)
                 {
                     if (productsToCampaign.Contains(product))
                     {
+                        Console.ForegroundColor= ConsoleColor.Red;
                         Console.WriteLine("Den produkten ingår redan i kampanjen.");
+                        Console.ResetColor();
                     }
                     else if (product.ProductId == findProductId)
                     {
@@ -171,7 +180,8 @@ namespace Kassasystem.ProductFolder
                     }
                 }
 
-                string confirm = InputValidator.GetValidYesOrNo("Vill du lägga till fler produkter till kampanjen? Ja/Nej");
+                string confirm = InputValidator.GetValidYesOrNo
+                    ("\nVill du lägga till fler produkter till kampanjen? Ja/Nej\n");
                 if (confirm == "ja")
                 {
                     continue;

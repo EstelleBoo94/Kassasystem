@@ -15,7 +15,9 @@ namespace Kassasystem.MenusFolder
             int spaces = consoleWidth / 2 - welcomeMessage.Length / 2;
             string leadingSpaces = new string(' ', spaces);
             Console.WriteLine($"\n\n\n{leadingSpaces}  Välkommen till");
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.Write($"{leadingSpaces}.");
+            Console.ResetColor();
 
             foreach (char c in welcomeMessage)
             {
@@ -25,7 +27,13 @@ namespace Kassasystem.MenusFolder
                 Thread.Sleep(70);
             }
             Thread.Sleep(500);
-            Console.WriteLine($"\n\n\n{leadingSpaces}Tryck valfri knapp\n{leadingSpaces}  för att starta");
+            Console.WriteLine($"\n\n\n{leadingSpaces}    Öppettider:\n" +
+                $"{leadingSpaces}    Alla dagar\n{leadingSpaces}    Alla tider");
+            Thread.Sleep(500);
+            Console.ForegroundColor= ConsoleColor.Yellow;
+            Console.WriteLine($"\n\n\n{leadingSpaces}Tryck valfri knapp\n" +
+                $"{leadingSpaces}  för att starta");
+            Console.ResetColor();
         }
     }
 }

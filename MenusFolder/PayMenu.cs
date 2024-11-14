@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Kassasystem.PurchasesFolder;
+using Kassasystem.Resources;
 
 namespace Kassasystem.MenusFolder
 {
@@ -23,13 +24,17 @@ namespace Kassasystem.MenusFolder
             while (inMenu == true)
             {
                 Console.Clear();
+                Designs.PrintHeader("BETALNING");
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("Välj alternativ med piltangenterna:");
+                Console.ResetColor();
 
                 for (int i = 0; i < paymentOptions.Count; i++)
                 {
                     if (i == selection)
                     {
                         Console.BackgroundColor = ConsoleColor.Cyan;
+                        Console.ForegroundColor = ConsoleColor.Black;
                     }
 
                     Console.WriteLine(paymentOptions[i]);
@@ -40,6 +45,7 @@ namespace Kassasystem.MenusFolder
                 if (selection == paymentOptions.Count)
                 {
                     Console.BackgroundColor = ConsoleColor.Cyan;
+                    Console.ForegroundColor = ConsoleColor.Black;
                 }
                 Console.WriteLine("Avbryt köp");
                 Console.ResetColor();
@@ -69,7 +75,9 @@ namespace Kassasystem.MenusFolder
                 {
                     if (selection == paymentOptions.Count)
                     {
+                        Console.ForegroundColor= ConsoleColor.Red;
                         Console.WriteLine("Är du säker på att du vill avbryta köpet? Ja/Nej");
+                        Console.ResetColor();
                         string input = Console.ReadLine();
                         if (input == "ja")
                         {
@@ -96,8 +104,9 @@ namespace Kassasystem.MenusFolder
 
 
             }
-
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("Tryck valfri tangent för att återgå till huvudmenyn.");
+            Console.ResetColor ();
             Console.ReadKey();
         }
     }
