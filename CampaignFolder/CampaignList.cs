@@ -4,15 +4,16 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Kassasystem.ReadingFromFile;
+using Kassasystem.ProductFolder;
+using static Kassasystem.ReadingAndWritingFolder.ReadingFromFile;
 
-namespace Kassasystem
+namespace Kassasystem.CampaignFolder
 {
     public class CampaignList
     {
         public static List<Campaign> CampaignListProp { get; set; } = new List<Campaign>();
 
-        
+
         public void AddNewCampaign(Campaign newCampaign)
         {
             CampaignListProp.Add(newCampaign);
@@ -47,7 +48,7 @@ namespace Kassasystem
                 {
                     Console.WriteLine($"{campaign.CampaignName} {campaign.CampaignStartDate} - {campaign.CampaignEndDate} {campaign.CampaignDiscountPercent}% rabatt.");
                     Console.WriteLine("Produkter som ingår i kampanjen:");
-                    foreach (Product product in prodToCampaign)
+                    foreach (Product product in campaign.ProductsInCampaign)
                     {
                         Console.WriteLine(product);
                     }

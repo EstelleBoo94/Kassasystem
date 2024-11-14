@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Channels;
 using System.Threading.Tasks;
-using static Kassasystem.ReadingFromFile;
+using Kassasystem.PurchasesFolder;
+using Kassasystem.Resources;
+using static Kassasystem.ReadingAndWritingFolder.ReadingFromFile;
 
-namespace Kassasystem
+namespace Kassasystem.ProductFolder
 {
     public class ProductListClass
     {
@@ -48,9 +50,9 @@ namespace Kassasystem
                 }
             }
 
-            using (StreamWriter writer = new StreamWriter(filePath)) 
+            using (StreamWriter writer = new StreamWriter(filePath))
             {
-                foreach (Product product in ProductListProp) 
+                foreach (Product product in ProductListProp)
                 {
                     writer.WriteLine(product.ToString());
                 }
@@ -96,6 +98,9 @@ namespace Kassasystem
         public void PrintProductList()
         {
             ProductListProp = ReadProductListFromFile("../../../ListOfProducts.txt");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Designs.PrintWithMargin("PRODUKTLISTA:\n");
+            Console.ResetColor();
             foreach (Product product in ProductListProp)
             {
                 string type;
@@ -107,10 +112,9 @@ namespace Kassasystem
                 {
                     type = "styckpris";
                 }
-                Console.WriteLine($"{product.ProductId}, {product.ProductName}, {product.Price}, {type}");
+                Designs.PrintWithMargin($"{product.ProductId}, {product.ProductName}, {product.Price}, {type}");
             }
         }
-
 
         public void FindProductToReceipt(int findID, short amount, Receipt receipt)
         {
@@ -156,7 +160,11 @@ namespace Kassasystem
                 int findProductId = InputValidator.GetValidProductID("Ange produktId på produkten som ska ingå i kampanjen:", ProductListProp);
                 foreach (Product product in ProductListProp)
                 {
-                    if (product.ProductId == findProductId)
+                    if (productsToCampaign.Contains(product))
+                    {
+                        Console.WriteLine("Den produkten ingår redan i kampanjen.");
+                    }
+                    else if (product.ProductId == findProductId)
                     {
                         productsToCampaign.Add(product);
                         break;

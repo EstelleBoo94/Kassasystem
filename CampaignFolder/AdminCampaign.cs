@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Kassasystem.ReadingFromFile;
+using Kassasystem.ProductFolder;
+using Kassasystem.Resources;
+using static Kassasystem.ReadingAndWritingFolder.ReadingFromFile;
 
-namespace Kassasystem
+namespace Kassasystem.CampaignFolder
 {
     public class AdminCampaign
     {
@@ -17,11 +19,11 @@ namespace Kassasystem
         public void AdminAddNewCampaign()
         {
             Console.Clear();
-            
+            Designs.PrintHeader("LÄGG TILL KAMPANJ");
+
             string name = InputValidator.GetNonEmptyString("Ange namn på kampanjen:");
             DateTime start = InputValidator.GetValidDate("Ange startdatum för kampanjen (yyyy-MM-dd):");
             DateTime end = InputValidator.GetValidDate("Ange slutdatum för kampanjen (yyyy-MM-dd):");
-            //bool correctDate = false;
             while (end <= start)
             {
                 Console.Clear();
@@ -31,7 +33,6 @@ namespace Kassasystem
                 end = InputValidator.GetValidDate("Ange slutdatum för kampanjen (yyyy-MM-dd):");
             }
             short discount = InputValidator.GetValidShort("Ange den procentuella rabatten (ange endast siffror):");
-            //bool correctDiscount = false;
             while (discount >= 100)
             {
                 Console.Clear();
@@ -54,6 +55,7 @@ namespace Kassasystem
         public void AdminRemoveCampaign()
         {
             Console.Clear();
+            Designs.PrintHeader("TA BORT KAMPANJ");
 
             campaignList.PrintCampaignList();
 
@@ -80,10 +82,11 @@ namespace Kassasystem
 
         public void PrintCampaignListToMenu()
         {
+            Designs.PrintHeader("PÅGÅENDE KAMPANJER");
             campaignList.PrintCampaignList();
         }
 
-        
+
 
     }
 }

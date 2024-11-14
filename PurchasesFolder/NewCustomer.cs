@@ -4,23 +4,26 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Kassasystem.ReadingFromFile;
+using Kassasystem.MenusFolder;
+using Kassasystem.ProductFolder;
+using Kassasystem.Resources;
+using static Kassasystem.ReadingAndWritingFolder.ReadingFromFile;
 
-namespace Kassasystem
+namespace Kassasystem.PurchasesFolder
 {
 
     public class NewCustomer
     {
+
         ProductListClass productList = new ProductListClass
             (ReadProductListFromFile("../../../ListOfProducts.txt"));
 
         public void StartPurchase()
         {
-
             Console.Clear();
+            Designs.PrintHeader("NY KUND");
 
             Receipt receipt = new Receipt();
-
 
             string sellerID = InputValidator.GetNonEmptyString
                 ("Ange säljare eller säljarnummer:");
@@ -40,9 +43,9 @@ namespace Kassasystem
                 string input = InputValidator.GetValidItemForPurchase
                         ("\nAnge produkt-ID och antal (vikt i kilo om kilopris) med mellanslag emellan:" +
                         "\n*Ange Pay för att slutföra köpet*\n");
-                
 
-                
+
+
                 PayMenu payMenu = new PayMenu();
 
                 if (input.ToLower() == "pay")
@@ -66,7 +69,7 @@ namespace Kassasystem
                 {
                     productList.FindProductToReceipt(findID, amount, receipt);
                 }
-                
+
             }
 
 

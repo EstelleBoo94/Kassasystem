@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Kassasystem.ProductFolder;
 
-namespace Kassasystem
+namespace Kassasystem.PurchasesFolder
 {
     public class ReceiptListClass
     {
         public static List<Product> ReceiptList { get; set; } = new List<Product>();
-        
+
 
         public static List<Product> GetReceiptList()
         {

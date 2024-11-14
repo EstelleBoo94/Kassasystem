@@ -5,9 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using static Kassasystem.ReadingFromFile;
+using Kassasystem.Resources;
+using static Kassasystem.ReadingAndWritingFolder.ReadingFromFile;
 
-namespace Kassasystem
+namespace Kassasystem.ProductFolder
 {
     public class AdminProducts
     {
@@ -16,7 +17,8 @@ namespace Kassasystem
         public void AdminAddNewProduct()
         {
             Console.Clear();
-            
+            Designs.PrintHeader("LÄGG TILL PRODUKT");
+
             string name = InputValidator.GetNonEmptyString("Ange namn på produkten:");
             decimal price = InputValidator.GetValidDecimal("Ange pris på produkten:");
             string sellingTypeInput = InputValidator.GetValidYesOrNo("Har produkten kilopris? Ja/Nej");
@@ -44,7 +46,8 @@ namespace Kassasystem
 
         public void AdminEditProduct()
         {
-            Console.Clear ();
+            Console.Clear();
+            Designs.PrintHeader("ÄNDRA PRODUKT");
 
             productList.PrintProductList();
 
@@ -86,6 +89,7 @@ namespace Kassasystem
         public void AdminRemoveProduct()
         {
             Console.Clear();
+            Designs.PrintHeader("TA BORT PRODUKT");
 
             productList.PrintProductList();
 

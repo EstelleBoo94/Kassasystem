@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Kassasystem.PurchasesFolder;
 
-namespace Kassasystem
+namespace Kassasystem.MenusFolder
 {
     public class PayMenu
     {
@@ -28,7 +29,7 @@ namespace Kassasystem
                 {
                     if (i == selection)
                     {
-                        Console.BackgroundColor = ConsoleColor.Green;
+                        Console.BackgroundColor = ConsoleColor.Cyan;
                     }
 
                     Console.WriteLine(paymentOptions[i]);
@@ -38,7 +39,7 @@ namespace Kassasystem
 
                 if (selection == paymentOptions.Count)
                 {
-                    Console.BackgroundColor = ConsoleColor.Green;
+                    Console.BackgroundColor = ConsoleColor.Cyan;
                 }
                 Console.WriteLine("Avbryt köp");
                 Console.ResetColor();
@@ -77,7 +78,7 @@ namespace Kassasystem
                         }
 
                     }
-                    
+
                     else if (selection == 0)
                     {
                         pay.PayCard();
@@ -86,7 +87,7 @@ namespace Kassasystem
                     }
                     else if (selection == 1)
                     {
-                        
+
                         pay.PayCash();
                         inMenu = false;
                         break;

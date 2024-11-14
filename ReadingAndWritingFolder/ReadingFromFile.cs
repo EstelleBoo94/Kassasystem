@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Kassasystem.ProductFolder;
 
-namespace Kassasystem
+namespace Kassasystem.ReadingAndWritingFolder
 {
     public static class ReadingFromFile
     {
@@ -22,11 +23,11 @@ namespace Kassasystem
                     }
                 }
             }
-            
+
             return readProductList;
         }
 
-        
+
         public static int GetReceiptNumber()
         {
             int receiptNumber = 1;

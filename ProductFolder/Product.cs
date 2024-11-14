@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Kassasystem
+namespace Kassasystem.ProductFolder
 {
     public enum SellingType
     {
@@ -29,13 +29,13 @@ namespace Kassasystem
             SellType = sellingType;
         }
 
-        public override string ToString() 
+        public override string ToString()
         {
             if (SellType == SellingType.ByItem)
             {
                 return $"{ProductId}: {ProductName}: {Price}: styckpris";
             }
-            else 
+            else
             {
                 return $"{ProductId}: {ProductName}: {Price}: kilopris";
             }
@@ -51,7 +51,7 @@ namespace Kassasystem
                 return new Product
                     (
                     Convert.ToInt32(parts[0]),
-                    parts[1],
+                    parts[1].Trim(),
                     Convert.ToDecimal(parts[2]),
                     SellingType.ByItem
                     );
@@ -61,7 +61,7 @@ namespace Kassasystem
                 return new Product
                 (
                     Convert.ToInt32(parts[0]),
-                    parts[1],
+                    parts[1].Trim(),
                     Convert.ToDecimal(parts[2]),
                     SellingType.ByKilo
 

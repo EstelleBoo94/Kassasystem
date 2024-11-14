@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Kassasystem.ReadingFromFile;
+using Kassasystem.ProductFolder;
+using Kassasystem.PurchasesFolder;
+using Kassasystem.Resources;
+using static Kassasystem.ReadingAndWritingFolder.ReadingFromFile;
 
-namespace Kassasystem
+namespace Kassasystem.MenusFolder
 {
     public class StartMenu
     {
@@ -25,13 +28,16 @@ namespace Kassasystem
             while (inMenu == true)
             {
                 Console.Clear();
-                Console.WriteLine("Välj alternativ med piltangenterna:");
+                Designs.PrintHeader("Välkommen till kassan hos .NET24-Mataffären!");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("Välj alternativ med piltangenterna:\n");
+                Console.ResetColor();
 
-                for (int i = 0; i < menuOptions.Count; i++) 
+                for (int i = 0; i < menuOptions.Count; i++)
                 {
-                    if (i == selection) 
-                    { 
-                        Console.BackgroundColor = ConsoleColor.Green;
+                    if (i == selection)
+                    {
+                        Console.BackgroundColor = ConsoleColor.Cyan;
                         Console.ForegroundColor = ConsoleColor.Black;
                     }
 
@@ -42,7 +48,7 @@ namespace Kassasystem
 
                 if (selection == menuOptions.Count)
                 {
-                    Console.BackgroundColor = ConsoleColor.Green;
+                    Console.BackgroundColor = ConsoleColor.Cyan;
                     Console.ForegroundColor = ConsoleColor.Black;
                 }
                 Console.WriteLine("Avsluta");
@@ -60,8 +66,8 @@ namespace Kassasystem
                     }
                 }
 
-                else if (keyInput.Key == ConsoleKey.DownArrow) 
-                { 
+                else if (keyInput.Key == ConsoleKey.DownArrow)
+                {
                     selection++;
                     if (selection > menuOptions.Count)
                     {
@@ -89,7 +95,6 @@ namespace Kassasystem
 
 
             }
-
             Console.WriteLine("Kassan stängs ner... Tryck valfri tangent för att avsluta helt.");
             Console.ReadKey();
             Environment.Exit(0);

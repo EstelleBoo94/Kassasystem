@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Kassasystem.ProductFolder;
+using Kassasystem.PurchasesFolder;
 
-namespace Kassasystem
+namespace Kassasystem.Resources
 {
     public static class InputValidator
     {
@@ -12,14 +14,18 @@ namespace Kassasystem
         {
             while (true)
             {
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine(prompt);
+                Console.ResetColor();
                 string input = Console.ReadLine();
                 if (!string.IsNullOrWhiteSpace(input))
                 {
                     return input;
                 }
                 Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Ogiltig inmatning.");
+                Console.ResetColor();
             }
         }
 
@@ -34,7 +40,9 @@ namespace Kassasystem
                     return input;
                 }
                 Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Ogiltig inmatning.");
+                Console.ResetColor();
             }
         }
 
@@ -50,13 +58,17 @@ namespace Kassasystem
                     if (result < 0)
                     {
                         Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Ogiltig inmatning. Ange en siffra över 0.");
+                        Console.ResetColor();
                         continue;
                     }
                     return result;
                 }
                 Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Ogiltig inmatning.");
+                Console.ResetColor();
             }
         }
 
@@ -72,13 +84,17 @@ namespace Kassasystem
                     if (result < 0)
                     {
                         Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Ogiltig inmatning. Ange en siffra över 0.");
+                        Console.ResetColor();
                         continue;
                     }
                     return result;
                 }
                 Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Ogiltig inmatning.");
+                Console.ResetColor();
             }
         }
 
@@ -94,13 +110,17 @@ namespace Kassasystem
                     if (result < 0)
                     {
                         Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Ogiltig inmatning. Ange en siffra över 0.");
+                        Console.ResetColor();
                         continue;
                     }
                     return result;
                 }
                 Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Ogiltig inmatning.");
+                Console.ResetColor();
             }
         }
 
@@ -115,7 +135,9 @@ namespace Kassasystem
                     if (result < DateTime.Today)
                     {
                         Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Ogiltig inmatning. Kan ej ange tidigare än dagens datum.");
+                        Console.ResetColor();
                         continue;
                     }
                     else
@@ -124,7 +146,9 @@ namespace Kassasystem
                     }
                 }
                 Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Ogiltig inmatning. Ange datum yyyy-MM-dd. Kan ej ange tidigare än dagens datum.");
+                Console.ResetColor();
             }
 
         }
@@ -140,18 +164,29 @@ namespace Kassasystem
 
                 if (input.Length == 3 && int.TryParse(input, out result))
                 {
+                    doesProductExist = false;
                     foreach (Product product in productList)
+                    {
                         if (result == product.ProductId)
                         {
                             doesProductExist = true;
+                            break;
                         }
-                        else
-                        {
-                            doesProductExist = false;
-                        }
+                    }
+                    if (doesProductExist == false)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Ogiltig inmatning, produkten måste finnas i listan.");
+                        Console.ResetColor();
+                    }
 
                 }
-                Console.WriteLine("Ogiltig inmatning, korrekt produktId har tre siffror och måste finnas med i produktlistan.");
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Ogiltig inmatning, korrekt produktId har tre siffror.");
+                    Console.ResetColor();
+                }
             }
             return result;
         }
@@ -159,10 +194,10 @@ namespace Kassasystem
         public static bool CheckIfProductExists(int idCheck, List<Product> productList)
         {
             bool doesItExist = false;
-            foreach (Product product in productList) 
+            foreach (Product product in productList)
             {
-                if (idCheck == product.ProductId) 
-                { 
+                if (idCheck == product.ProductId)
+                {
                     doesItExist = true;
                 }
             }
@@ -170,23 +205,35 @@ namespace Kassasystem
             {
                 return false;
             }
-            else 
-            { 
-                return true; 
+            else
+            {
+                return true;
             }
-            
+
         }
 
         public static string GetValidItemForPurchase(string prompt)
         {
             while (true)
             {
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine(prompt);
+                Console.ResetColor();
                 string input = Console.ReadLine();
 
                 if (input.ToLower() == "pay")
                 {
-                    return input;
+                    if (ReceiptListClass.ReceiptList.Count == 0)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Minst en produkt måste köpas.");
+                        Console.ResetColor();
+                    }
+                    else
+                    {
+                        return input;
+                    }
+
                 }
                 else
                 {
@@ -199,9 +246,11 @@ namespace Kassasystem
                     {
                         return input;
                     }
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Ogiltig inmatning, ange tresiffrig produktId " +
                         "mellanslag och antal/vikt i kilo, över 0." +
                         "\nTex [123 3], eller [123 0,5], eller [Pay].");
+                    Console.ResetColor();
                 }
             }
         }
@@ -226,9 +275,11 @@ namespace Kassasystem
                         return input;
                     }
                 }
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Ogiltig inmatning, ange namn " +
                     "mellanslag pris (över 0) mellanslag och kilo eller styck." +
                     "\nTex [produktnamn 12,3 kilo], eller [produktnamn 12,3 styck].");
+                Console.ResetColor();
 
             }
         }

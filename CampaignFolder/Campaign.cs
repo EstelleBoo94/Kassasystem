@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Kassasystem.ProductFolder;
 
-namespace Kassasystem
+namespace Kassasystem.CampaignFolder
 {
     public class Campaign
     {

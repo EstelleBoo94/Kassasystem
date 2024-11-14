@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Kassasystem.ReadingFromFile;
+using Kassasystem.CampaignFolder;
+using Kassasystem.ProductFolder;
+using Kassasystem.Resources;
+using static Kassasystem.ReadingAndWritingFolder.ReadingFromFile;
 
-namespace Kassasystem
+namespace Kassasystem.MenusFolder
 {
 
     public class AdminMenu
@@ -28,13 +31,16 @@ namespace Kassasystem
             while (inMenu == true)
             {
                 Console.Clear();
-                Console.WriteLine("Välj alternativ med piltangenterna:");
+                Designs.PrintHeader("ADMIN MENY");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("Välj alternativ med piltangenterna:\n");
+                Console.ResetColor();
 
                 for (int i = 0; i < menuOptions.Count; i++)
                 {
                     if (i == selection)
                     {
-                        Console.BackgroundColor = ConsoleColor.Green;
+                        Console.BackgroundColor = ConsoleColor.Cyan;
                         Console.ForegroundColor = ConsoleColor.Black;
                     }
 
@@ -45,9 +51,10 @@ namespace Kassasystem
 
                 if (selection == menuOptions.Count)
                 {
-                    Console.BackgroundColor = ConsoleColor.Green;
+                    Console.BackgroundColor = ConsoleColor.Cyan;
                     Console.ForegroundColor = ConsoleColor.Black;
                 }
+
                 Console.WriteLine("Tillbaka till huvudmeny");
                 Console.ResetColor();
 
@@ -94,6 +101,7 @@ namespace Kassasystem
                     else if (selection == 3)
                     {
                         Console.Clear();
+                        Designs.PrintHeader("VISA PRODUKTLISTA");
                         productList.PrintProductList();
                         Console.WriteLine("\nTryck valfri tangent för att återgå till menyn.");
                         Console.ReadKey();
