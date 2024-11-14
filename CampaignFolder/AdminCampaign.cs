@@ -22,7 +22,7 @@ namespace Kassasystem.CampaignFolder
             Console.Clear();
             Designs.PrintHeader("LÄGG TILL KAMPANJ");
 
-            string name = InputValidator.GetNonEmptyString("Ange namn på kampanjen:\n");
+            string name = InputValidator.GetNonEmptyStringAddCampaign("Ange namn på kampanjen:\n");
             DateTime start = InputValidator.GetValidDate
                 ("\nAnge startdatum för kampanjen (yyyy-MM-dd):\n");
             DateTime end = InputValidator.GetValidDate
@@ -75,14 +75,14 @@ namespace Kassasystem.CampaignFolder
 
             while (emptyCampaignList == false)
             {
-                string campaignNameInput = InputValidator.GetNonEmptyString
+                string campaignNameInput = InputValidator.GetNonEmptyStringRemoveCampaign
                     ("Ange namnet på kampanjen du vill ta bort:\n");
 
                 Console.Clear();
                 Designs.PrintHeader("TA BORT KAMPANJ");
                 campaignList.FindCampaignToPrint(campaignNameInput, productToCampaignList);
 
-                string deleteThis = InputValidator.GetValidYesOrNo
+                string deleteThis = InputValidator.GetValidYesOrNoRemoveCampaign
                     ("\nVill du ta bort den här kampanjen helt? Ja/Nej\n");
                 if (deleteThis.ToLower() == "ja")
                 {

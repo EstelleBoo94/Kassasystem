@@ -21,9 +21,9 @@ namespace Kassasystem.ProductFolder
             Console.Clear();
             Designs.PrintHeader("LÄGG TILL PRODUKT");
 
-            string name = InputValidator.GetNonEmptyString("Ange namn på produkten:\n");
+            string name = InputValidator.GetNonEmptyStringAddProduct("Ange namn på produkten:\n");
             decimal price = InputValidator.GetValidDecimal("\nAnge pris på produkten:\n");
-            string sellingTypeInput = InputValidator.GetValidYesOrNo
+            string sellingTypeInput = InputValidator.GetValidYesOrNoAddProduct
                 ("\nHar produkten kilopris? Ja/Nej\n");
             int productID = productList.GetNextProductID();
             if (sellingTypeInput.ToLower() == "ja")
@@ -128,7 +128,7 @@ namespace Kassasystem.ProductFolder
             Designs.PrintHeader("TA BORT PRODUKT");
             productList.FindProductToPrint(productIdInput);
 
-            string deleteThis = InputValidator.GetValidYesOrNo
+            string deleteThis = InputValidator.GetValidYesOrNoRemoveProduct
                 ("\nVill du ta bort den här produkten helt? Ja/Nej\n");
             if (deleteThis.ToLower() == "ja")
             {

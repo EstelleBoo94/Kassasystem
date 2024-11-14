@@ -10,7 +10,7 @@ namespace Kassasystem.Resources
 {
     public static class InputValidator
     {
-        public static string GetNonEmptyString(string prompt)
+        public static string GetNonEmptyStringSellerId(string prompt)
         {
             while (true)
             {
@@ -23,13 +23,74 @@ namespace Kassasystem.Resources
                     return input;
                 }
                 Console.Clear();
+                Designs.PrintHeader("NY KUND");
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Ogiltig inmatning.");
                 Console.ResetColor();
             }
         }
 
-        public static string GetValidYesOrNo(string prompt)
+        public static string GetNonEmptyStringAddProduct(string prompt)
+        {
+            while (true)
+            {
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine(prompt);
+                Console.ResetColor();
+                string input = Console.ReadLine();
+                if (!string.IsNullOrWhiteSpace(input))
+                {
+                    return input;
+                }
+                Console.Clear();
+                Designs.PrintHeader("LÄGG TILL PRODUKT");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Ogiltig inmatning.");
+                Console.ResetColor();
+            }
+        }
+
+        public static string GetNonEmptyStringAddCampaign(string prompt)
+        {
+            while (true)
+            {
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine(prompt);
+                Console.ResetColor();
+                string input = Console.ReadLine();
+                if (!string.IsNullOrWhiteSpace(input))
+                {
+                    return input;
+                }
+                Console.Clear();
+                Designs.PrintHeader("LÄGG TILL KAMPANJ");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Ogiltig inmatning.");
+                Console.ResetColor();
+            }
+        }
+
+        public static string GetNonEmptyStringRemoveCampaign(string prompt)
+        {
+            while (true)
+            {
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine(prompt);
+                Console.ResetColor();
+                string input = Console.ReadLine();
+                if (!string.IsNullOrWhiteSpace(input))
+                {
+                    return input;
+                }
+                Console.Clear();
+                Designs.PrintHeader("TA BORT KAMPANJ");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Ogiltig inmatning.");
+                Console.ResetColor();
+            }
+        }
+
+        public static string GetValidYesOrNoRemoveProduct(string prompt)
         {
             while (true)
             {
@@ -42,6 +103,67 @@ namespace Kassasystem.Resources
                     return input;
                 }
                 Console.Clear();
+                Designs.PrintHeader("TA BORT PRODUKT");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Ogiltig inmatning.");
+                Console.ResetColor();
+            }
+        }
+
+        public static string GetValidYesOrNoAddProduct(string prompt)
+        {
+            while (true)
+            {
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine(prompt);
+                Console.ResetColor();
+                string input = Console.ReadLine();
+                if (input.ToLower() == "ja" || input.ToLower() == "nej")
+                {
+                    return input;
+                }
+                Console.Clear();
+                Designs.PrintHeader("LÄGG TILL PRODUKT");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Ogiltig inmatning.");
+                Console.ResetColor();
+            }
+        }
+
+        public static string GetValidYesOrNoRemoveCampaign(string prompt)
+        {
+            while (true)
+            {
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine(prompt);
+                Console.ResetColor();
+                string input = Console.ReadLine();
+                if (input.ToLower() == "ja" || input.ToLower() == "nej")
+                {
+                    return input;
+                }
+                Console.Clear();
+                Designs.PrintHeader("TA BORT KAMPANJ");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Ogiltig inmatning.");
+                Console.ResetColor();
+            }
+        }
+
+        public static string GetValidYesOrNoProductToCampaign(string prompt)
+        {
+            while (true)
+            {
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine(prompt);
+                Console.ResetColor();
+                string input = Console.ReadLine();
+                if (input.ToLower() == "ja" || input.ToLower() == "nej")
+                {
+                    return input;
+                }
+                Console.Clear();
+                Designs.PrintHeader("LÄGG TILL KAMPANJ");
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Ogiltig inmatning.");
                 Console.ResetColor();
@@ -62,6 +184,7 @@ namespace Kassasystem.Resources
                     if (result < 0)
                     {
                         Console.Clear();
+                        Designs.PrintHeader("LÄGG TILL KAMPANJ");
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Ogiltig inmatning. Ange en siffra över 0.");
                         Console.ResetColor();
@@ -70,6 +193,7 @@ namespace Kassasystem.Resources
                     return result;
                 }
                 Console.Clear();
+                Designs.PrintHeader("LÄGG TILL KAMPANJ");
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Ogiltig inmatning.");
                 Console.ResetColor();
@@ -90,6 +214,7 @@ namespace Kassasystem.Resources
                     if (result < 0)
                     {
                         Console.Clear();
+                        Designs.PrintHeader("LÄGG TILL PRODUKT");
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Ogiltig inmatning. Ange en siffra över 0.");
                         Console.ResetColor();
@@ -98,6 +223,7 @@ namespace Kassasystem.Resources
                     return result;
                 }
                 Console.Clear();
+                Designs.PrintHeader("LÄGG TILL PRODUKT");
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Ogiltig inmatning.");
                 Console.ResetColor();
@@ -115,17 +241,20 @@ namespace Kassasystem.Resources
                 string input = Console.ReadLine();
                 if (int.TryParse(input, out result))
                 {
-                    if (result < 0)
+                    if (result < 0 || result < Receipt.Total)
                     {
                         Console.Clear();
+                        Designs.PrintHeader("BETALNING");
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Ogiltig inmatning. Ange en siffra över 0.");
+                        Console.WriteLine("Ogiltig inmatning. Ange en siffra över 0 " +
+                            "och mer än den totala kostnaden.");
                         Console.ResetColor();
                         continue;
                     }
                     return result;
                 }
                 Console.Clear();
+                Designs.PrintHeader("BETALNING");
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Ogiltig inmatning.");
                 Console.ResetColor();
@@ -145,6 +274,7 @@ namespace Kassasystem.Resources
                     if (result < DateTime.Today)
                     {
                         Console.Clear();
+                        Designs.PrintHeader("LÄGG TILL KAMPANJ");
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Ogiltig inmatning. Kan ej ange tidigare än dagens datum.");
                         Console.ResetColor();
@@ -156,6 +286,7 @@ namespace Kassasystem.Resources
                     }
                 }
                 Console.Clear();
+                Designs.PrintHeader("LÄGG TILL KAMPANJ");
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Ogiltig inmatning. Ange datum yyyy-MM-dd. " +
                     "Kan ej ange tidigare än dagens datum.");
@@ -282,13 +413,16 @@ namespace Kassasystem.Resources
                 {
                     string[] parts = input.ToLower().Split(' ');
 
-                    if (parts.Length == 3
-                    && decimal.TryParse(parts[1], out _)
-                    && decimal.Parse(parts[1]) > 0
-                    && parts[2] == "kilo" || parts[2] == "styck")
+                    if (parts.Length == 3)
                     {
-                        return input;
+                        if (decimal.TryParse(parts[1], out _)
+                        && decimal.Parse(parts[1]) > 0
+                        && parts[2] == "kilo" || parts[2] == "styck")
+                        {
+                            return input;
+                        }
                     }
+
                 }
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Ogiltig inmatning, ange namn " +

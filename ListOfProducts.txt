@@ -8,3 +8,4 @@
 108: korvbröd: 20,95: styckpris
 109: kakor: 21,95: styckpris
 110: läsk: 15,95: styckpris
+111: a: 2: styckpris

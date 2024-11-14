@@ -25,7 +25,7 @@ namespace Kassasystem.PurchasesFolder
 
             Receipt receipt = new Receipt();
 
-            string sellerID = InputValidator.GetNonEmptyString
+            string sellerID = InputValidator.GetNonEmptyStringSellerId
                 ("Ange säljare eller säljarnummer:");
 
             Receipt.SellerId = sellerID;

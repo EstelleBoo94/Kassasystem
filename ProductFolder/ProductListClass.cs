@@ -180,7 +180,7 @@ namespace Kassasystem.ProductFolder
                     }
                 }
 
-                string confirm = InputValidator.GetValidYesOrNo
+                string confirm = InputValidator.GetValidYesOrNoProductToCampaign
                     ("\nVill du lägga till fler produkter till kampanjen? Ja/Nej\n");
                 if (confirm == "ja")
                 {
